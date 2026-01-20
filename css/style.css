@@ -1,0 +1,477 @@
+/* --- 1. DESIGN TOKENS (SISTEMA ÓRBITA) --- */
+:root {
+    /* Cores */
+    --color-cosmos-deep: #0a0e27;
+    --color-solar-orange: #FF643B;
+    --color-nebula-blue: #1e3a8a;
+    --color-white: #f8f9fa;
+    --color-gray-soft: #a0a0c0;
+    
+    /* Glows e Sombras */
+    --glow-orange: 0 0 32px rgba(255, 100, 59, 0.4);
+    --shadow-elevation: 0 10px 40px rgba(0,0,0,0.5);
+    
+    /* Tipografia */
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Manrope', sans-serif;
+    
+    /* Espaçamentos e Raios */
+    --radius-pill: 9999px;
+    --radius-card: 32px;
+    --container-padding: 8vw;
+}
+
+/* --- 2. RESET & BASE --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--color-cosmos-deep);
+    color: var(--color-white);
+    font-family: var(--font-sans);
+    overflow-x: hidden; /* Evita scroll lateral */
+    /* overflow-y é controlado pelo JS durante o carregamento do loader */
+    /* ... mantenha o que já existe ... */
+    cursor: none; /* ESCONDE O CURSOR PADRÃO DO WINDOWS */
+}
+
+/* --- SCROLLBAR CUSTOMIZADA (Chrome/Safari/Edge) --- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-cosmos-deep);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-solar-orange);
+}
+
+a { text-decoration: none; color: inherit; }
+
+ul { list-style: none; }
+
+/* --- 3. LOADER SUPER MODERNO (NOVO) --- */
+.loader-container {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background-color: #000; /* Fundo preto absoluto para contraste */
+    z-index: 9999; /* Fica acima de tudo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* O JS vai manipular o clip-path aqui para o efeito de revelar */
+}
+
+.loader-content {
+    position: relative;
+    overflow: hidden; /* Garante que as letras "nasçam" de baixo */
+    padding: 10px 20px;
+}
+
+.loader-text {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: 0.5em;
+    color: var(--color-white);
+    display: flex;
+    justify-content: center;
+}
+
+.char {
+    display: inline-block;
+    transform: translateY(100%); /* Começa escondido para baixo */
+    opacity: 0;
+}
+
+.loader-line {
+    width: 0%; /* Começa invisível */
+    height: 2px;
+    background-color: var(--color-solar-orange);
+    margin: 15px auto 0 auto;
+}
+
+/* --- 4. NAVIGATION (Sticky & Glass) --- */
+.orbit-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 24px var(--container-padding);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 1s ease; /* Suavidade na entrada */
+    transform: translateY(-100%); /* Começa escondido (JS revela) */
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.logo .dot { color: var(--color-solar-orange); }
+
+.nav-links {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+}
+
+.nav-links a:not(.btn-pill-small) {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.nav-links a:hover { opacity: 1; color: var(--color-solar-orange); }
+
+.btn-pill-small {
+    padding: 12px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-pill);
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.btn-pill-small:hover {
+    border-color: var(--color-solar-orange);
+    background-color: rgba(255, 100, 59, 0.1);
+    box-shadow: 0 0 15px rgba(255, 100, 59, 0.2);
+}
+
+/* --- 5. HERO SECTION (Centralizada + Vídeo) --- */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100dvh; /* Full viewport height */
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 24px;
+    overflow: hidden;
+}
+
+/* Video Background Wrapper */
+.video-wrapper {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1; /* Fica atrás de tudo */
+}
+
+#bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cobre a tela sem distorcer */
+    pointer-events: none; /* Impede interação do usuário com o vídeo */
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    /* Gradiente radial para focar no centro e escurecer as bordas */
+    background: radial-gradient(circle, rgba(10,14,39,0.5) 0%, rgba(10,14,39,0.95) 90%);
+    z-index: 1;
+}
+
+/* Conteúdo Central */
+.hero-content-center {
+    position: relative;
+    z-index: 2; /* Fica acima do overlay */
+    max-width: 1000px;
+    opacity: 0; /* JS controla a entrada */
+    transform: translateY(30px);
+}
+
+.eyebrow-text {
+    display: block;
+    color: var(--color-solar-orange);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.8rem, 6vw, 6rem); /* Responsivo fluido */
+    line-height: 1.1;
+    margin-bottom: 2rem;
+}
+
+.highlight-serif {
+    font-style: italic;
+    color: var(--color-white);
+}
+
+.hero-description {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 650px;
+    margin: 0 auto 3.5rem auto;
+    line-height: 1.6;
+}
+
+/* Botão Principal */
+.btn-pill-glow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-solar-orange);
+    color: var(--color-white);
+    padding: 20px 56px;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--glow-orange);
+    cursor: pointer;
+}
+
+.btn-pill-glow:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 0 60px rgba(255, 100, 59, 0.7);
+}
+
+/* Scroll Indicator (Mouse) */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    opacity: 0; /* JS revela */
+}
+
+.mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    position: relative;
+}
+
+.wheel {
+    width: 4px;
+    height: 8px;
+    background: var(--color-solar-orange);
+    border-radius: 2px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollWheel 2s infinite;
+}
+
+@keyframes scrollWheel {
+    0% { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, 20px); opacity: 0; }
+}
+
+/* --- 6. BREAKPOINTS RESPONSIVOS --- */
+
+/* Notebooks (1280px - 1440px) */
+@media (max-width: 1440px) {
+    :root { --container-padding: 5vw; }
+    .hero-title { font-size: 4.5rem; }
+}
+
+/* Tablets (iPad Pro / Horizontal - 1024px) */
+@media (max-width: 1024px) {
+    .nav-links { display: none; /* Em produção: Ativar menu hambúrguer */ }
+    .logo { font-size: 1.3rem; }
+    .hero-title { font-size: 4rem; }
+}
+
+/* Mobile (Smartphones - 768px e menor) */
+@media (max-width: 768px) {
+    :root { --container-padding: 20px; }
+
+    .orbit-nav { padding: 20px; }
+
+    .hero-title { 
+        font-size: 2.8rem; /* Menor para não estourar a tela */
+        margin-bottom: 1.5rem;
+    }
+    
+    .eyebrow-text {
+        font-size: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .btn-pill-glow {
+        width: 100%; /* Botão full width no mobile */
+        padding: 18px;
+    }
+
+    .scroll-indicator { bottom: 20px; }
+
+    .cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-solar-orange);
+    position: fixed;
+    top: 0; left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 99999; /* Garante que fique acima de TUDO */
+    pointer-events: none;
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    position: fixed;
+    top: 0; left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 99998; /* Um pouco abaixo do ponto */
+    pointer-events: none;
+    transition: width 0.1s, height 0.1s, background-color 0.1s;
+}
+
+body.hovering .cursor-outline {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 100, 59, 0.1);
+    border-color: var(--color-solar-orange);
+}
+
+/* --- CORREÇÃO: MOUSE LIGHT (Acima do Overlay) --- */
+.mouse-light {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 2; /* Aumentado para ficar acima do video-overlay (que é 1) */
+    background: radial-gradient(
+        600px circle at var(--x, 50%) var(--y, 50%), 
+        rgba(29, 78, 216, 0.15), 
+        transparent 40%
+    );
+    mix-blend-mode: screen; 
+}
+
+/* --- CORREÇÃO: AUDIO PLAYER (Reset Hardcore) --- */
+.audio-player {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 10000; /* Acima de tudo */
+}
+
+.audio-btn {
+    /* Resetando estilos nativos do navegador */
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    
+    /* Estilo Órbita */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: none; /* Importante para manter o cursor customizado */
+    color: var(--color-white);
+    transition: all 0.3s ease;
+    font-family: var(--font-sans); /* Garante a fonte certa */
+}
+
+.audio-btn:hover {
+    border-color: var(--color-solar-orange);
+    background: rgba(255, 100, 59, 0.15);
+    transform: scale(1.05);
+}
+
+.audio-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    color: white; /* Forçando branco */
+}
+
+/* Equalizador */
+.equalizer {
+    display: flex;
+    gap: 3px;
+    height: 12px;
+    align-items: flex-end;
+}
+
+.bar {
+    width: 2px;
+    background-color: var(--color-solar-orange);
+    height: 3px; /* Altura inicial mínima */
+    transition: height 0.2s;
+}
+
+/* Animação do equalizador quando tocando */
+.audio-player.playing .bar:nth-child(1) { animation: equalizer 0.5s infinite alternate; }
+.audio-player.playing .bar:nth-child(2) { animation: equalizer 0.7s infinite alternate 0.1s; }
+.audio-player.playing .bar:nth-child(3) { animation: equalizer 0.6s infinite alternate 0.2s; }
+
+@keyframes equalizer {
+    0% { height: 20%; }
+    100% { height: 100%; }
+}
+
+/* LENIS (Obrigatório para o smooth scroll funcionar bem) */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+}
