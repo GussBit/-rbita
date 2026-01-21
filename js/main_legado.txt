@@ -1,0 +1,181 @@
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- 1. SETUP LENIS (SMOOTH SCROLL) ---
+    const lenis = new Lenis({
+        duration: 0.6,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smooth: true
+    }); 
+
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // --- 2. CUSTOM CURSOR & LIGHT ---
+    const cursorDot = document.querySelector('[data-cursor-dot]');
+    const cursorOutline = document.querySelector('[data-cursor-outline]');
+    const lightEffect = document.querySelector('.mouse-light');
+    
+    const moveCursor = (e) => {
+        const posX = e.clientX;
+        const posY = e.clientY;
+
+        if(cursorDot) {
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+        }
+        
+        if(cursorOutline) {
+            gsap.to(cursorOutline, {
+                x: posX,
+                y: posY,
+                duration: 0.15,
+                ease: "power2.out"
+            });
+        }
+
+        if(lightEffect) {
+            lightEffect.style.setProperty('--x', `${posX}px`);
+            lightEffect.style.setProperty('--y', `${posY}px`);
+        }
+    }
+
+    window.addEventListener('mousemove', moveCursor);
+
+    // Hover Effects
+    const interactables = document.querySelectorAll('a, button, .hover-target, .swiper-button-prev-custom, .swiper-button-next-custom');
+    interactables.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            document.body.classList.add('hovering');
+            gsap.to(el, { scale: 1.05, duration: 0.3 });
+        });
+        el.addEventListener('mouseleave', () => {
+            document.body.classList.remove('hovering');
+            gsap.to(el, { scale: 1, duration: 0.3 });
+        });
+    });
+
+    // --- 3. AUDIO PLAYER ---
+    const audioBtn = document.getElementById('audio-btn');
+    const audio = document.getElementById('ambient-music');
+    const playerContainer = document.querySelector('.audio-player');
+    let isPlaying = false;
+
+    if(audio) audio.volume = 0.4; 
+
+    if(audioBtn) {
+        audioBtn.addEventListener('click', () => {
+            if (!isPlaying) {
+                audio.play().then(() => {
+                    isPlaying = true;
+                    playerContainer.classList.add('playing');
+                    document.querySelector('.audio-label').textContent = "PAUSE";
+                }).catch(e => console.log("Erro áudio:", e));
+            } else {
+                audio.pause();
+                isPlaying = false;
+                playerContainer.classList.remove('playing');
+                document.querySelector('.audio-label').textContent = "SOUND";
+            }
+        });
+    }
+
+    // --- 4. LOADER & HERO ENTRANCE ---
+    gsap.registerPlugin();
+
+    const tl = gsap.timeline({
+        defaults: { ease: "power4.out" },
+        onComplete: () => {
+            document.body.style.overflow = 'auto';
+            lenis.start();
+        }
+    });
+
+    lenis.stop();
+
+    if(document.querySelector('.loader-container')) {
+        tl.to(".char", { y: 0, opacity: 1, stagger: 0.1, duration: 0.8 })
+          .to(".loader-line", { width: "100%", duration: 0.8 }, "-=0.4")
+          .to({}, { duration: 0.5 })
+          .to(".loader-text, .loader-line", { y: -50, opacity: 0, duration: 0.5 })
+          .to(".loader-container", { clipPath: "circle(0% at 50% 50%)", duration: 1.5, ease: "expo.inOut" })
+          .to(".hero-content-center", { opacity: 1, y: 0, duration: 1.5 }, "-=0.8")
+          .to(".orbit-nav", { transform: "translateY(0)", duration: 1 }, "-=1.2")
+          .to(".scroll-indicator", { opacity: 1, duration: 1 }, "-=0.5");
+    }
+
+    // --- 5. LEGACY STACK ANIMATION ---
+    gsap.registerPlugin(ScrollTrigger);
+
+    // EFEITO STACK: Hero sendo coberta pela Legacy
+    ScrollTrigger.create({
+        trigger: ".hero-section",
+        start: "top top",
+        end: "bottom top",
+        pin: true,
+        pinSpacing: false,
+        scrub: true
+    });
+
+    // Animação das cartas e texto
+    const legacyTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#legacy",
+            start: "top top", 
+            end: "+=3000", 
+            pin: true, 
+            scrub: 1, 
+            anticipatePin: 1
+        }
+    });
+
+    legacyTl.to(".legacy-text-intro", { opacity: 1, scale: 1, duration: 2 })
+            .to(".legacy-text-intro", { opacity: 0, scale: 0.9, duration: 2, delay: 1 })
+            .to(".stack-wrapper", { opacity: 1, duration: 1 });
+            
+    const cards = gsap.utils.toArray(".insta-card");
+    
+    cards.forEach((card, i) => {
+        legacyTl.to(card, {
+            y: i * -15,
+            scale: 1 - (cards.length - i) * 0.05,
+            opacity: 1,
+            duration: 2,
+            ease: "power2.out"
+        }, "<+=0.5");
+
+        legacyTl.to(".glow-layer", {
+            opacity: (i + 1) / cards.length,
+            duration: 2
+        }, "<");
+    });
+
+    legacyTl.to(".stack-wrapper", { 
+        scale: 1.5, opacity: 0, filter: "blur(20px)", duration: 2, delay: 0.5 
+    })
+    .to(".legacy-outro", { opacity: 1, scale: 1, duration: 2 });
+
+
+    // --- 6. CASES SWIPER (EXPANDABLE) ---
+    const swiper = new Swiper(".casesSwiper", {
+        slidesPerView: "auto", // Permite larguras variáveis (300px vs 85vw)
+        centeredSlides: true, // Centraliza o ativo
+        spaceBetween: 24,
+        loop: false, // Desliguei o loop para evitar bugs visuais na expansão, mas pode ligar se preferir
+        grabCursor: true,
+        speed: 800,
+        
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        
+        breakpoints: {
+            320: { spaceBetween: 16 },
+            1024: { spaceBetween: 32 }
+        }
+    });
+
+});

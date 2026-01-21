@@ -1,0 +1,18 @@
+.orbit-nav {
+    position: fixed; top: 0; left: 0; width: 100%;
+    padding: 24px var(--container-padding); z-index: 1000;
+    backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 1s ease; transform: translateY(-100%);
+}
+.nav-container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; }
+.logo .dot { color: var(--color-solar-orange); }
+.nav-links { display: flex; gap: 3rem; align-items: center; }
+.nav-links a:not(.btn-pill-small) {
+    font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em;
+    opacity: 0.8; transition: opacity 0.3s;
+}
+.nav-links a:hover { opacity: 1; color: var(--color-solar-orange); }
+
+@media (max-width: 1024px) { .nav-links { display: none; } }
+@media (max-width: 768px) { .orbit-nav { padding: 20px; } }

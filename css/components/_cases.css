@@ -1,0 +1,268 @@
+/* css/components/_cases.css */
+
+.cases-section {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--color-cosmos-deep);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 5;
+}
+
+.cases-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.cases-header-simple {
+    padding: 0 5vw;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+    text-align: center; /* Centralizado para combinar com o stack */
+}
+
+.cases-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: var(--color-white);
+}
+
+.cases-eyebrow {
+    color: var(--color-solar-orange);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+/* SWIPER CONTAINER (Effect Cards) */
+.casesSwiper {
+    width: 90%;
+    max-width: 1100px; /* Limite para desktop */
+    height: 70vh;
+    padding: 20px;
+    overflow: visible;
+}
+
+.swiper-slide {
+    border-radius: 24px;
+    background: #0f1225;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+/* ESTRUTURA DO CARD (Desktop: 2 Colunas) */
+.case-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+/* COLUNA 1: VISUAL (Imagem) */
+.case-visual {
+    width: 45%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.case-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+
+/* Header do Método (Badge no topo da imagem) */
+.method-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+}
+
+.method-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+}
+
+.method-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-white);
+    letter-spacing: 0.05em;
+}
+
+/* COLUNA 2: CONTEÚDO */
+.case-content {
+    width: 55%;
+    height: 100%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espaça header, info e footer */
+    background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent);
+}
+
+.content-header { margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+.content-header h3 { font-family: var(--font-serif); font-size: 2.5rem; color: var(--color-white); margin-bottom: 5px; }
+.project-type { color: var(--color-solar-orange); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; }
+
+/* Grid de Informações */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    overflow-y: auto; /* Scroll se o texto for grande */
+    padding-right: 10px;
+}
+
+.info-block h4 { color: var(--color-white); font-size: 0.9rem; margin-bottom: 6px; opacity: 0.8; }
+.info-block p { color: var(--color-gray-soft); font-size: 0.85rem; line-height: 1.5; }
+
+/* Gráfico Simples */
+.result-block { grid-column: span 2; background: rgba(255,255,255,0.03); padding: 16px; border-radius: 12px; }
+.chart-stat span { font-size: 2rem; font-weight: 700; color: var(--color-white); }
+.chart-stat small { color: var(--color-solar-orange); text-transform: uppercase; font-size: 0.7rem; }
+
+/* RODAPÉ: TECH STACK */
+.tech-stack {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    gap: 16px;
+    opacity: 0.6;
+}
+
+.tech-icon {
+    height: 20px;
+    width: auto;
+    fill: white; /* Para SVGs */
+}
+
+/* PAGINAÇÃO CUSTOMIZADA */
+.swiper-pagination {
+    position: absolute;
+    bottom: 0px !important;
+    left: 50% !important;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+}
+
+.swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: var(--color-white);
+    opacity: 0.3;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    width: 24px; /* Mais largo */
+    background: var(--color-solar-orange);
+    opacity: 1;
+}
+
+/* --- MOBILE LAYOUT (Overlay) --- */
+.btn-view-more { display: none; } /* Escondido no desktop */
+
+@media (max-width: 768px) {
+    .casesSwiper { width: 95%; height: 80vh; padding: 0; }
+    
+    .case-card { 
+        flex-direction: column; 
+        position: relative; 
+    }
+
+    /* Imagem vira background total */
+    .case-visual { 
+        width: 100%; 
+        height: 100%; 
+        position: absolute; 
+        top: 0; left: 0; 
+        z-index: 1;
+    }
+
+    .case-img { filter: brightness(0.8); transition: filter 0.3s; }
+
+    /* Conteúdo Sobreposto */
+    .case-content {
+        width: 100%;
+        height: auto;
+        max-height: 40%; /* Estado inicial: reduzido */
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        background: linear-gradient(to top, rgba(10, 14, 39, 1) 20%, rgba(10, 14, 39, 0.8) 100%);
+        backdrop-filter: blur(5px);
+        padding: 24px;
+        transition: max-height 0.5s ease;
+        border-top: 1px solid rgba(255,255,255,0.2);
+        border-radius: 24px 24px 0 0;
+        justify-content: flex-start;
+    }
+
+    /* Estado Expandido (via JS) */
+    .case-card.expanded .case-content {
+        max-height: 85%; /* Sobe até quase o topo */
+        background: rgba(10, 14, 39, 0.95);
+    }
+    
+    .case-card.expanded .case-img { filter: brightness(0.4); }
+
+    /* Ajustes de Texto Mobile */
+    .content-header h3 { font-size: 1.8rem; }
+    .content-grid { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
+    
+    /* Esconde detalhes inicialmente no mobile */
+    .content-grid, .tech-stack {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+        height: 0;
+    }
+
+    .case-card.expanded .content-grid,
+    .case-card.expanded .tech-stack {
+        opacity: 1;
+        pointer-events: all;
+        height: auto;
+    }
+
+    /* Botão Ver Mais */
+    .btn-view-more {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+        background: none;
+        border: none;
+        color: var(--color-solar-orange);
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .btn-view-more svg { transition: transform 0.3s; }
+    .case-card.expanded .btn-view-more svg { transform: rotate(180deg); }
+}

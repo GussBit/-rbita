@@ -1,0 +1,30 @@
+:root {
+    --color-cosmos-deep: #0a0e27;
+    --color-solar-orange: #FF643B;
+    --color-nebula-blue: #1e3a8a;
+    --color-white: #f8f9fa;
+    --color-gray-soft: #a0a0c0;
+
+    --glow-orange: 0 0 32px rgba(255, 100, 59, 0.4);
+    --shadow-elevation: 0 10px 40px rgba(0, 0, 0, 0.5);
+
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Manrope', sans-serif;
+
+    --radius-pill: 9999px;
+    --container-padding: 8vw;
+
+    /* NOVAS CORES (MÉTODOS) */
+    --color-method-orbita: #3983F2;
+    --color-method-elite: #FF643B; /* Mesmo que solar-orange */
+    --color-method-starter: #3BFFB1;
+    --color-method-craft: #584BF2;
+}
+
+/* Ajustes Globais de Responsividade */
+@media (max-width: 1440px) {
+    :root { --container-padding: 5vw; }
+}
+@media (max-width: 768px) {
+    :root { --container-padding: 20px; }
+}

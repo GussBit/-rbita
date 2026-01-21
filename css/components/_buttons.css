@@ -1,0 +1,24 @@
+/* Botão Pequeno (Nav) */
+.btn-pill-small {
+    padding: 12px 24px; border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-pill); font-size: 0.85rem; transition: all 0.3s ease;
+}
+.btn-pill-small:hover {
+    border-color: var(--color-solar-orange); background-color: rgba(255, 100, 59, 0.1);
+}
+
+/* Botão Principal (Glow) */
+.btn-pill-glow {
+    display: inline-flex; align-items: center; justify-content: center;
+    background-color: var(--color-solar-orange); color: var(--color-white);
+    padding: 20px 56px; border-radius: var(--radius-pill); font-weight: 600;
+    font-size: 1.1rem; letter-spacing: 0.05em; transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--glow-orange); cursor: none; margin-top: 32px;
+}
+.btn-pill-glow:hover {
+    transform: translateY(-4px) scale(1.05); box-shadow: 0 0 60px rgba(255, 100, 59, 0.7);
+}
+
+@media (max-width: 768px) {
+    .btn-pill-glow { width: 90%; padding: 18px; }
+}

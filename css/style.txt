@@ -1,0 +1,744 @@
+/* --- 1. DESIGN TOKENS --- */
+:root {
+    --color-cosmos-deep: #0a0e27;
+    --color-solar-orange: #FF643B;
+    --color-nebula-blue: #1e3a8a;
+    --color-white: #f8f9fa;
+    --color-gray-soft: #a0a0c0;
+
+    --glow-orange: 0 0 32px rgba(255, 100, 59, 0.4);
+    --shadow-elevation: 0 10px 40px rgba(0, 0, 0, 0.5);
+
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Manrope', sans-serif;
+
+    --radius-pill: 9999px;
+    --container-padding: 8vw;
+}
+
+/* --- 2. RESET & BASE --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--color-cosmos-deep);
+    color: var(--color-white);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    cursor: none;
+    /* Esconde cursor padrão */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Scrollbar Customizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-cosmos-deep);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-solar-orange);
+}
+
+/* --- 3. LOADER --- */
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-content {
+    position: relative;
+    overflow: hidden;
+    padding: 10px 20px;
+}
+
+.loader-text {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: 0.5em;
+    color: var(--color-white);
+    display: flex;
+}
+
+.char {
+    display: inline-block;
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.loader-line {
+    width: 0%;
+    height: 2px;
+    background-color: var(--color-solar-orange);
+    margin: 15px auto 0 auto;
+}
+
+/* --- 4. NAV --- */
+.orbit-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 24px var(--container-padding);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 1s ease;
+    transform: translateY(-100%);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.logo .dot {
+    color: var(--color-solar-orange);
+}
+
+.nav-links {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+}
+
+.nav-links a:not(.btn-pill-small) {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.nav-links a:hover {
+    opacity: 1;
+    color: var(--color-solar-orange);
+}
+
+.btn-pill-small {
+    padding: 12px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-pill);
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.btn-pill-small:hover {
+    border-color: var(--color-solar-orange);
+    background-color: rgba(255, 100, 59, 0.1);
+}
+
+/* --- 5. HERO SECTION --- */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 24px;
+    overflow: hidden;
+    z-index: 1; /* Camada de baixo */
+}
+
+.video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+#bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(10, 14, 39, 0.5) 0%, rgba(10, 14, 39, 0.95) 90%);
+    z-index: 1;
+}
+
+.hero-content-center {
+    position: relative;
+    z-index: 2;
+    max-width: 1000px;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.eyebrow-text {
+    display: block;
+    color: var(--color-solar-orange);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.8rem, 6vw, 6rem);
+    line-height: 1.1;
+    margin-bottom: 2rem;
+}
+
+.highlight-serif {
+    font-style: italic;
+    color: var(--color-white);
+}
+
+.hero-description {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 650px;
+    margin: 0 auto 3.5rem auto;
+    line-height: 1.6;
+}
+
+.btn-pill-glow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-solar-orange);
+    color: var(--color-white);
+    padding: 20px 56px;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--glow-orange);
+    cursor: none;
+    margin-top: 32px;
+}
+
+.btn-pill-glow:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 0 60px rgba(255, 100, 59, 0.7);
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    opacity: 0;
+}
+
+.mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    position: relative;
+}
+
+.wheel {
+    width: 4px;
+    height: 8px;
+    background: var(--color-solar-orange);
+    border-radius: 2px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollWheel 2s infinite;
+}
+
+@keyframes scrollWheel {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, 20px);
+        opacity: 0;
+    }
+}
+
+/* --- 6. ELEMENTS (Cursor, Light, Audio) --- */
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-solar-orange);
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 99999;
+    pointer-events: none;
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 99998;
+    pointer-events: none;
+    transition: width 0.1s, height 0.1s, background-color 0.1s;
+}
+
+body.hovering .cursor-outline {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 100, 59, 0.1);
+    border-color: var(--color-solar-orange);
+}
+
+.mouse-light {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(29, 78, 216, 0.15), transparent 40%);
+    mix-blend-mode: screen;
+}
+
+.audio-player {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 10000;
+}
+
+.audio-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: none;
+    color: var(--color-white);
+    transition: all 0.3s ease;
+    font-family: var(--font-sans);
+}
+
+.audio-btn:hover {
+    border-color: var(--color-solar-orange);
+    background: rgba(255, 100, 59, 0.15);
+    transform: scale(1.05);
+}
+
+.audio-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    color: white;
+}
+
+.equalizer {
+    display: flex;
+    gap: 3px;
+    height: 12px;
+    align-items: flex-end;
+}
+
+.bar {
+    width: 2px;
+    background-color: var(--color-solar-orange);
+    height: 3px;
+    transition: height 0.2s;
+}
+
+.audio-player.playing .bar:nth-child(1) {
+    animation: equalizer 0.5s infinite alternate;
+}
+
+.audio-player.playing .bar:nth-child(2) {
+    animation: equalizer 0.7s infinite alternate 0.1s;
+}
+
+.audio-player.playing .bar:nth-child(3) {
+    animation: equalizer 0.6s infinite alternate 0.2s;
+}
+
+@keyframes equalizer {
+    0% {
+        height: 20%;
+    }
+
+    100% {
+        height: 100%;
+    }
+}
+
+/* LENIS */
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+/* BREAKPOINTS */
+@media (max-width: 1440px) {
+    :root {
+        --container-padding: 5vw;
+    }
+
+    .hero-title {
+        font-size: 4.5rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .nav-links {
+        display: none;
+    }
+
+    .hero-title {
+        font-size: 4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --container-padding: 20px;
+    }
+
+    .orbit-nav {
+        padding: 20px;
+    }
+
+    .hero-title {
+        font-size: 2.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .eyebrow-text {
+        font-size: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .btn-pill-glow {
+        width: 90%;
+        padding: 18px;
+    }
+
+    .scroll-indicator {
+        bottom: 20px;
+    }
+}
+
+/* --- SEÇÃO MANIFESTO --- */
+.manifesto-section {
+    width: 100%;
+    min-height: 80vh;
+    /* Ocupa quase a tela toda */
+    background-color: var(--color-cosmos-deep);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 100px 24px;
+}
+
+.manifesto-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.manifesto-label {
+    font-size: 0.85rem;
+    letter-spacing: 0.4em;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.manifesto-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    /* Grande e responsivo */
+    line-height: 1.2;
+    color: var(--color-white);
+    margin-bottom: 3rem;
+}
+
+.highlight-orange {
+    color: var(--color-solar-orange);
+    font-style: italic;
+    /* Toque de elegância */
+}
+
+/* O cursor piscando */
+.cursor {
+    font-weight: 100;
+    color: var(--color-solar-orange);
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.manifesto-copy {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--color-gray-soft);
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0;
+    /* Começa invisível para o GSAP animar */
+    transform: translateY(20px);
+}
+
+.manifesto-copy strong {
+    color: var(--color-white);
+    font-weight: 400;
+    /* Levemente destacado */
+}
+
+/* --- SEÇÃO LEGACY (STACK) --- */
+.legacy-section {
+    width: 100%;
+    height: 100vh;
+    /* Altura total para travar o scroll */
+    background-color: var(--color-cosmos-deep);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 2; /* Camada de cima */
+}
+
+.legacy-container {
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Textos (Posicionamento Absoluto para sobrepor) */
+.legacy-text-intro,
+.legacy-outro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    z-index: 10;
+    opacity: 0;
+    /* JS vai revelar */
+}
+
+.legacy-title,
+.outro-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1.1;
+    color: var(--color-white);
+}
+
+.highlight-orange {
+    color: var(--color-solar-orange);
+    font-style: italic;
+}
+
+/* STACK WRAPPER */
+.stack-wrapper {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    opacity: 0;
+    /* JS vai revelar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+}
+
+.stack-label {
+    font-size: 1rem;
+    color: var(--color-gray-soft);
+    margin-bottom: 4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+
+/* O Baralho de Cartas */
+.cards-deck {
+    position: relative;
+    width: 550px;
+    height: 100px;
+}
+
+/* A camada de brilho atrás das cartas */
+.glow-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--color-solar-orange);
+    filter: blur(80px);
+    opacity: 0;
+    /* Começa apagado, aumenta com o scroll */
+    transition: opacity 0.1s;
+    z-index: -1;
+}
+
+/* ESTILO DO CARD INSTAGRAM (Glass) */
+.insta-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 64px 32px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 32px;
+    display: inline-block;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+    /* Inicialmente escondidos e deslocados */
+    opacity: 0;
+    transform: translateY(100px) scale(0.9);
+}
+
+.insta-avatar {
+    width: 124px;
+    height: 124px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #333, #555);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    margin: 0 auto 15px auto;
+}
+
+.insta-avatar.special-avatar {
+    background: linear-gradient(45deg, var(--color-solar-orange), #ff9e7d);
+    border-color: var(--color-solar-orange);
+}
+
+.insta-name {
+    font-weight: 700;
+    font-size: clamp(1rem, 10vw, 3.5rem);
+    color: var(--color-white);
+    text-align: center;
+}
+
+.insta-stats {
+    font-size: clamp(1rem, 10vw, 1.5rem);
+    color: var(--color-gray-soft);
+    text-align: center;
+}
+
+.insta-stats span {
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .cards-deck {
+        width: 85%;
+    }
+}
