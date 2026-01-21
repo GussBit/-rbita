@@ -1,0 +1,18 @@
+[
+  {
+    "id": "01",
+    "cliente": "Dra. Ana Beatriz",
+    "cargo": "Dermatologista",
+    "depoimento": "O design da Órbita mudou completamente a percepção de valor da minha clínica.",
+    "audio_url": "",
+    "waveform_color": ""
+  },
+  {
+    "id": "02",
+    "cliente": "Dr. Lucas Mendes",
+    "cargo": "Ortopedista",
+    "depoimento": "Simplesmente incrível. A equipe captou exatamente a essência que eu queria passar.",
+    "audio_url": "assets/audio/teste.ogg", 
+    "waveform_color": "#FF643B"
+  }
+]

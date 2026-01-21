@@ -9,6 +9,7 @@
 @import "components/_buttons.css";
 @import "components/_nav.css";
 @import "components/_loader.css";
+@import "audio-toast.css";
 
 /* 3. Seções */
 @import "components/_hero.css";

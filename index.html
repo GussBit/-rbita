@@ -19,6 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/audio-toast.css"> 
 </head>
 
 <body>
@@ -156,111 +157,103 @@
     </section>
 
     <section id="services" class="services-section">
-        <div class="services-bg-fx"></div>
-
-        <div class="services-container">
-            
+        
+        <div class="services-sidebar">
             <div class="services-header">
-                <span class="service-eyebrow">Como posso te ajudar</span>
-                <h2 class="service-title">Expertise <span class="highlight-orange">Digital</span></h2>
+                <span class="service-eyebrow">Expertise</span>
+                <h2 class="service-title">Como posso <br><span class="highlight-orange">te ajudar?</span></h2>
             </div>
 
-            <div class="services-layout">
-                <div class="services-nav">
-                    <button class="tab-btn active" data-target="sites">Construção de Sites</button>
-                    <button class="tab-btn" data-target="social">Social Media</button>
-                    <button class="tab-btn" data-target="curadoria">Curadoria</button>
-                    <button class="tab-btn" data-target="branding">Branding</button>
-                    <button class="tab-btn" data-target="video">Edição de Vídeo</button>
+            <div class="services-tabs">
+                <button class="tab-item active" data-target="sites">
+                    <div class="tab-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                    </div>
+                    <span>Websites & Landing Pages</span>
+                </button>
+
+                <button class="tab-item" data-target="social">
+                    <div class="tab-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </div>
+                    <span>Design Social Media</span>
+                </button>
+
+                <button class="tab-item" data-target="curadoria">
+                    <div class="tab-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    </div>
+                    <span>Curadoria & Copy</span>
+                </button>
+
+                <button class="tab-item" data-target="branding">
+                    <div class="tab-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <span>Branding</span>
+                </button>
+
+                <button class="tab-item" data-target="video">
+                    <div class="tab-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                    </div>
+                    <span>Edição de Vídeo</span>
+                </button>
+            </div>
+
+            <div class="service-details-container">
+                <div class="service-detail active" id="detail-sites">
+                    <p>Desenvolvimento focado em conversão. Sites que não apenas existem, mas vendem sua autoridade.</p>
+                    <a href="#orcamento" class="btn-service-cta">Solicitar Orçamento <span>→</span></a>
                 </div>
-
-                <div class="services-display">
-                    
-                    <div class="service-pane active" id="sites">
-                        <div class="pane-content">
-                            <h3>Sites de Alta Performance</h3>
-                            <p>Desenvolvimento web focado em conversão, velocidade e estética premium. Do institucional ao e-commerce.</p>
-                            <ul class="service-list">
-                                <li>Landing Pages de Alta Conversão</li>
-                                <li>Sites Institucionais Otimizados (SEO)</li>
-                                <li>Integração com APIs e CRM</li>
-                            </ul>
-                            <a href="#contato" class="btn-service">Solicitar Orçamento</a>
-                        </div>
-                        <div class="pane-visual">
-                            <video autoplay muted loop playsinline poster="assets/images/site-poster.jpg" class="service-video">
-                                <source src="assets/videos/site-demo.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                    </div>
-
-                    <div class="service-pane" id="social">
-                        <div class="pane-content">
-                            <h3>Design para Social Media</h3>
-                            <p>Eleve a percepção de valor do seu perfil. Designs que transmitem autoridade e retêm a atenção no feed.</p>
-                            <ul class="service-list">
-                                <li>Posts Estáticos e Carrosséis</li>
-                                <li>Stories Criativos e Motion</li>
-                                <li>Design de Destaques e Perfil</li>
-                            </ul>
-                            <a href="#contato" class="btn-service">Solicitar Orçamento</a>
-                        </div>
-                        <div class="pane-visual">
-                            <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974" class="service-img" alt="Social Media">
-                        </div>
-                    </div>
-
-                    <div class="service-pane" id="curadoria">
-                        <div class="pane-content">
-                            <h3>Curadoria de Conteúdo</h3>
-                            <p>Estratégia e seleção do que postar. Transformamos conhecimento técnico em conteúdo desejável.</p>
-                            <ul class="service-list">
-                                <li>Linha Editorial Estratégica</li>
-                                <li>Roteiros para Reels e YouTube</li>
-                                <li>Copywriting Persuasivo</li>
-                            </ul>
-                            <a href="#contato" class="btn-service">Solicitar Orçamento</a>
-                        </div>
-                        <div class="pane-visual">
-                            <img src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?q=80&w=2080" class="service-img" alt="Curadoria">
-                        </div>
-                    </div>
-
-                    <div class="service-pane" id="branding">
-                        <div class="pane-content">
-                            <h3>Branding & Identidade</h3>
-                            <p>Marcas não são apenas logotipos. Criamos universos visuais que contam histórias e geram conexão.</p>
-                            <ul class="service-list">
-                                <li>Logo e Manual da Marca</li>
-                                <li>Paleta de Cores e Tipografia</li>
-                                <li>Papelaria e Materiais de Apoio</li>
-                            </ul>
-                            <a href="#contato" class="btn-service">Solicitar Orçamento</a>
-                        </div>
-                        <div class="pane-visual">
-                            <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?q=80&w=2070" class="service-img" alt="Branding">
-                        </div>
-                    </div>
-
-                    <div class="service-pane" id="video">
-                        <div class="pane-content">
-                            <h3>Edição de Vídeo (Motion)</h3>
-                            <p>Edições dinâmicas que prendem a atenção. O formato mais consumido da internet, com qualidade profissional.</p>
-                            <ul class="service-list">
-                                <li>Edição de Reels/TikTok (Nuggets)</li>
-                                <li>Vídeos para YouTube (Vlog/Edu)</li>
-                                <li>Color Grading e Sound Design</li>
-                            </ul>
-                            <a href="#contato" class="btn-service">Solicitar Orçamento</a>
-                        </div>
-                        <div class="pane-visual">
-                            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44c?q=80&w=2070" class="service-img" alt="Video Editing">
-                        </div>
-                    </div>
-
+                <div class="service-detail" id="detail-social">
+                    <p>Posts que param o scroll. Transforme seguidores em fãs com design estratégico de alto padrão.</p>
+                    <a href="#orcamento" class="btn-service-cta">Solicitar Orçamento <span>→</span></a>
+                </div>
+                <div class="service-detail" id="detail-curadoria">
+                    <p>Transformamos seu conhecimento técnico em conteúdo desejável e fácil de consumir.</p>
+                    <a href="#orcamento" class="btn-service-cta">Solicitar Orçamento <span>→</span></a>
+                </div>
+                <div class="service-detail" id="detail-branding">
+                    <p>Construção de marcas memoráveis. Do logotipo ao universo visual completo.</p>
+                    <a href="#orcamento" class="btn-service-cta">Solicitar Orçamento <span>→</span></a>
+                </div>
+                <div class="service-detail" id="detail-video">
+                    <p>Edição dinâmica para Reels e YouTube. Retenção máxima para o seu conteúdo.</p>
+                    <a href="#orcamento" class="btn-service-cta">Solicitar Orçamento <span>→</span></a>
                 </div>
             </div>
         </div>
+
+        <div class="services-visual-stage">
+            <div class="visual-item active" id="visual-sites">
+                <div class="visual-overlay-grad"></div>
+                <video autoplay muted loop playsinline poster="assets/images/site-poster.jpg">
+                    <source src="assets/videos/site-demo.mp4" type="video/mp4">
+                </video>
+            </div>
+            
+            <div class="visual-item" id="visual-social">
+                <div class="visual-overlay-grad"></div>
+                <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974" alt="Social Media">
+            </div>
+
+            <div class="visual-item" id="visual-curadoria">
+                <div class="visual-overlay-grad"></div>
+                <img src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?q=80&w=2080" alt="Curadoria">
+            </div>
+
+            <div class="visual-item" id="visual-branding">
+                <div class="visual-overlay-grad"></div>
+                <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?q=80&w=2070" alt="Branding">
+            </div>
+
+            <div class="visual-item" id="visual-video">
+                <div class="visual-overlay-grad"></div>
+                <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44c?q=80&w=2070" alt="Video">
+            </div>
+        </div>
+
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

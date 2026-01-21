@@ -5,6 +5,7 @@ import { initLoader } from './modules/loader.js';
 import { initLegacyAnimation } from './modules/legacy.js';
 import { initCasesSwiper } from './modules/cases.js';
 import { initServices } from './modules/services.js';
+import { initAudioToast } from './modules/audioToast.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Inicializa Scroll (Lenis)
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. UI Elements
     initCursor();
     initAudio();
+    initAudioToast();
 
     // 3. Animação de Entrada
     initLoader();

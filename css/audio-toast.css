@@ -1,0 +1,243 @@
+/* css/audio-toast.css */
+:root {
+    --orbit-orange: #FF643B; /* Cor laranja do seu projeto */
+}
+
+.audio-toast-container {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 380px;
+    background: rgba(20, 20, 20, 0.6); /* Fundo um pouco mais escuro para contraste */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    font-family: 'Manrope', sans-serif;
+    color: #fff;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
+/* Header com Navegação */
+.toast-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.client-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.client-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #fff;
+}
+
+.client-role {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 2px;
+}
+
+.toast-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Botão Fechar */
+.btn-close-toast {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    padding: 4px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.btn-close-toast:hover {
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+/* Setas de Navegação */
+.nav-arrows {
+    display: flex;
+    gap: 2px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: 2px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease, background 0.2s ease;
+    border-radius: 12px;
+}
+
+.nav-btn:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+}
+
+/* Corpo e Player */
+.toast-body {
+    margin-bottom: 0;
+    transition: margin 0.3s ease;
+}
+
+.has-audio .toast-body {
+    margin-bottom: 16px;
+}
+
+.quote-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    font-style: italic;
+}
+
+.audio-player-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.play-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.play-btn:hover {
+    transform: scale(1.05);
+}
+
+.play-btn svg {
+    width: 10px;
+    height: 10px;
+    fill: #000;
+    margin-left: 1px;
+}
+
+.play-btn.playing svg {
+    margin-left: 0;
+}
+
+.waveform-container {
+    flex-grow: 1;
+    height: 24px;
+    position: relative;
+    opacity: 0.8;
+}
+
+.time-display {
+    font-size: 0.65rem;
+    font-family: monospace;
+    color: rgba(255, 255, 255, 0.5);
+    min-width: 65px;
+    text-align: right;
+}
+
+/* Botão Reabrir Pulsante */
+.audio-toast-reopen-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 9998;
+    color: #fff;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+/* Animação de Onda/Pulso */
+.audio-toast-reopen-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid var(--orbit-orange);
+    opacity: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.audio-toast-reopen-btn.pulsing::before {
+    animation: pulse-orange 2s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+}
+
+@keyframes pulse-orange {
+    0% {
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+        border-width: 20px;
+    }
+    100% {
+        width: 1950%; /* Expande bastante */
+        height: 1950%;
+        opacity: 0;
+        border-width: 0px;
+    }
+}
+
+.audio-toast-reopen-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(0) scale(1.1);
+}
+
+@media (max-width: 480px) {
+    .audio-toast-container {
+        width: calc(100% - 40px);
+        bottom: 20px;
+        left: 20px;
+        padding: 16px;
+    }
+}

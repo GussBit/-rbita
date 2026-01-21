@@ -1,42 +1,44 @@
 // js/modules/services.js
 
 export function initServices() {
-    // 1. TABS LOGIC
-    const tabs = document.querySelectorAll('.tab-btn');
-    const panes = document.querySelectorAll('.service-pane');
+    const tabs = document.querySelectorAll('.tab-item');
+    
+    // Elementos de Texto (Detalhes)
+    const details = document.querySelectorAll('.service-detail');
+    
+    // Elementos Visuais (Vídeos/Imagens)
+    const visuals = document.querySelectorAll('.visual-item');
 
-    if(tabs.length > 0) {
+    if (tabs.length > 0) {
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                // Remove ativo de todos
+                const targetKey = tab.getAttribute('data-target'); // ex: "sites"
+
+                // 1. Remove Ativo de TUDO
                 tabs.forEach(t => t.classList.remove('active'));
-                panes.forEach(p => p.classList.remove('active'));
+                details.forEach(d => d.classList.remove('active'));
+                visuals.forEach(v => v.classList.remove('active'));
 
-                // Adiciona ativo no clicado
+                // 2. Ativa o Botão Clicado
                 tab.classList.add('active');
-                
-                // Ativa o conteúdo correspondente
-                const targetId = tab.getAttribute('data-target');
-                const targetPane = document.getElementById(targetId);
-                if(targetPane) targetPane.classList.add('active');
+
+                // 3. Ativa o Detalhe de Texto correspondente
+                const targetDetail = document.getElementById(`detail-${targetKey}`);
+                if (targetDetail) targetDetail.classList.add('active');
+
+                // 4. Ativa o Visual correspondente
+                const targetVisual = document.getElementById(`visual-${targetKey}`);
+                if (targetVisual) {
+                    targetVisual.classList.add('active');
+                    
+                    // Se for vídeo, reinicia o play para dar impacto
+                    const video = targetVisual.querySelector('video');
+                    if(video) {
+                        video.currentTime = 0;
+                        video.play();
+                    }
+                }
             });
-        });
-    }
-
-    // 2. MOUSE BACKGROUND EFFECT
-    const section = document.querySelector('.services-section');
-    const bgFx = document.querySelector('.services-bg-fx');
-
-    if(section && bgFx) {
-        section.addEventListener('mousemove', (e) => {
-            const rect = section.getBoundingClientRect();
-            // Calcula X e Y relativos à seção (0% a 100%)
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-            // Atualiza variáveis CSS
-            section.style.setProperty('--mouse-x', `${x}%`);
-            section.style.setProperty('--mouse-y', `${y}%`);
         });
     }
 }

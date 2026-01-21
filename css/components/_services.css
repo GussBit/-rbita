@@ -2,200 +2,202 @@
 
 .services-section {
     width: 100%;
-    min-height: 100vh;
-    background-color: #F4F5F7; /* Branco levemente acinzentado (off-white) */
-    color: var(--color-cosmos-deep); /* Texto escuro */
+    height: 100vh; /* Altura total da tela */
+    min-height: 700px; /* Evita esmagar em telas pequenas */
+    background-color: #fff; /* Fundo Branco puro */
+    color: var(--color-cosmos-deep);
+    display: grid;
+    grid-template-columns: 450px 1fr; /* Sidebar Fixa | Vídeo Flexível */
     position: relative;
-    padding: 100px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
+    z-index: 10;
 }
 
-/* BACKGROUND EFFECT (MOUSE) */
-.services-bg-fx {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    /* Gradiente radial que segue o mouse (via JS) */
-    background: radial-gradient(
-        800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-        rgba(225, 227, 235, 1), 
-        transparent 40%
-    );
-    pointer-events: none;
-    z-index: 0;
+/* --- LADO ESQUERDO: SIDEBAR --- */
+.services-sidebar {
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fff;
+    z-index: 2;
+    box-shadow: 10px 0 50px rgba(0,0,0,0.05); /* Sombra suave sobre o vídeo */
 }
 
-.services-container {
-    width: 100%;
-    max-width: 1200px;
-    padding: 0 24px;
-    position: relative;
-    z-index: 1;
-}
-
-/* HEADER */
-.services-header { text-align: center; margin-bottom: 60px; }
+.services-header { margin-bottom: 40px; }
 .service-eyebrow { 
-    color: var(--color-gray-soft); /* Cinza médio no tema claro */
-    font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem;
-    display: block; margin-bottom: 12px;
+    color: var(--color-gray-soft); 
+    text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem; 
+    font-weight: 700; margin-bottom: 10px; display: block;
 }
 .service-title {
     font-family: var(--font-serif);
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    color: var(--color-cosmos-deep);
+    font-size: 3rem;
     line-height: 1.1;
+    color: var(--color-cosmos-deep);
 }
 .highlight-orange { color: var(--color-solar-orange); font-style: italic; }
 
-/* LAYOUT GRID (Tabs Esquerda | Conteúdo Direita) */
-.services-layout {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 60px;
-    min-height: 500px;
-}
-
-/* NAVEGAÇÃO (BOTÕES) */
-.services-nav {
+/* TABS COM ÍCONES */
+.services-tabs {
     display: flex;
     flex-direction: column;
-    gap: 0;
-    border-left: 2px solid rgba(0,0,0,0.05);
+    gap: 12px;
+    margin-bottom: 40px;
 }
 
-.tab-btn {
-    text-align: left;
-    background: transparent;
+.tab-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
     border: none;
-    padding: 20px 24px;
-    font-family: var(--font-sans);
-    font-size: 1.1rem;
-    color: #888;
+    background: transparent;
+    border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
-    position: relative;
+    text-align: left;
+    color: #888;
+    font-family: var(--font-sans);
+    font-size: 1rem;
     font-weight: 500;
 }
 
-.tab-btn:hover { color: var(--color-solar-orange); background: rgba(0,0,0,0.02); }
-
-/* Indicador Ativo (Borda lateral) */
-.tab-btn::before {
-    content: '';
-    position: absolute; left: -2px; top: 0;
-    width: 2px; height: 100%;
-    background: var(--color-solar-orange);
-    transform: scaleY(0);
-    transition: transform 0.3s ease;
+.tab-icon {
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    background: #F4F5F7;
+    border-radius: 8px;
+    color: #888;
+    transition: all 0.3s ease;
 }
 
-.tab-btn.active {
-    color: var(--color-cosmos-deep);
-    font-weight: 700;
-    background: white;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+.tab-item:hover { background: #f9f9f9; color: var(--color-solar-orange); }
+.tab-item:hover .tab-icon { color: var(--color-solar-orange); background: #fff; }
+
+/* Estado Ativo */
+.tab-item.active {
+    background: var(--color-cosmos-deep);
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(10, 14, 39, 0.15);
 }
 
-.tab-btn.active::before { transform: scaleY(1); }
+.tab-item.active .tab-icon {
+    background: rgba(255,255,255,0.1);
+    color: var(--color-solar-orange);
+}
 
-/* ÁREA DE CONTEÚDO */
-.services-display {
+/* DETALHES DO SERVIÇO (Texto abaixo das tabs) */
+.service-details-container {
+    min-height: 120px; /* Reserva espaço */
     position: relative;
 }
 
-.service-pane {
-    display: none; /* Escondido por padrão */
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    animation: fadeIn 0.6s ease;
+.service-detail {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    animation: fadeUp 0.5s ease;
+}
+.service-detail.active { display: flex; }
+
+.service-detail p {
+    font-size: 1rem; color: #555; line-height: 1.6;
 }
 
-.service-pane.active { display: grid; }
+.btn-service-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    color: var(--color-solar-orange);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-top: 10px;
+    transition: gap 0.3s;
+}
+.btn-service-cta:hover { gap: 15px; }
 
-@keyframes fadeIn {
+/* --- LADO DIREITO: VISUAL EDGE-TO-EDGE --- */
+.services-visual-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    overflow: hidden;
+}
+
+.visual-item {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, transform 1.2s ease;
+    transform: scale(1.1); /* Zoom out effect */
+}
+
+.visual-item.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    z-index: 1;
+}
+
+.visual-item video, 
+.visual-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+
+/* Gradiente sobre o vídeo para garantir leitura se necessário (opcional) */
+.visual-overlay-grad {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.4), transparent 50%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 1024px) {
+    .services-section { grid-template-columns: 350px 1fr; }
+    .services-sidebar { padding: 40px 30px; }
+}
+
+@media (max-width: 768px) {
+    .services-section {
+        height: auto;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column-reverse; /* Vídeo em cima, Texto embaixo */
+    }
+
+    /* Vídeo vira topo da tela no mobile */
+    .services-visual-stage {
+        height: 50vh;
+        width: 100%;
+        flex-shrink: 0;
+    }
+
+    .services-sidebar {
+        width: 100%;
+        padding: 40px 24px;
+        box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+        border-radius: 24px 24px 0 0;
+        margin-top: -24px; /* Sobe um pouco sobre o vídeo */
+        position: relative;
+        z-index: 5;
+    }
+
+    .service-title { font-size: 2.5rem; }
+    
+    .tab-item { padding: 12px; font-size: 0.9rem; }
+    .tab-icon { width: 32px; height: 32px; }
+}
+
+@keyframes fadeUp {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-/* Conteúdo de Texto */
-.pane-content {
-    display: flex; flex-direction: column; justify-content: center;
-}
-
-.pane-content h3 {
-    font-family: var(--font-serif); font-size: 2.2rem;
-    color: var(--color-cosmos-deep); margin-bottom: 20px;
-}
-
-.pane-content p {
-    font-size: 1rem; color: #555; line-height: 1.6; margin-bottom: 30px;
-}
-
-.service-list { margin-bottom: 40px; }
-.service-list li {
-    position: relative; padding-left: 20px; margin-bottom: 12px;
-    color: #444; font-weight: 500;
-}
-.service-list li::before {
-    content: '•'; color: var(--color-solar-orange);
-    position: absolute; left: 0; font-weight: bold;
-}
-
-.btn-service {
-    display: inline-block;
-    padding: 16px 40px;
-    background: var(--color-cosmos-deep);
-    color: white;
-    font-weight: 600;
-    border-radius: 50px;
-    align-self: flex-start;
-    transition: all 0.3s;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-.btn-service:hover {
-    background: var(--color-solar-orange);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(255, 100, 59, 0.3);
-}
-
-/* Conteúdo Visual (Vídeo/Img) */
-.pane-visual {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-    height: 100%; min-height: 400px;
-    background: #000;
-}
-
-.service-video, .service-img {
-    width: 100%; height: 100%; object-fit: cover;
-}
-
-/* RESPONSIVIDADE */
-@media (max-width: 900px) {
-    .services-layout { grid-template-columns: 1fr; gap: 30px; }
-    
-    .services-nav {
-        flex-direction: row; overflow-x: auto;
-        border-left: none; border-bottom: 2px solid rgba(0,0,0,0.05);
-        padding-bottom: 0;
-    }
-    
-    .tab-btn { white-space: nowrap; padding: 15px 20px; font-size: 0.9rem; }
-    
-    .tab-btn::before {
-        left: 0; top: auto; bottom: -2px;
-        width: 100%; height: 2px;
-        transform: scaleX(0); transform-origin: left;
-    }
-    .tab-btn.active::before { transform: scaleX(1); }
-
-    .service-pane { grid-template-columns: 1fr; }
-    .pane-visual { height: 300px; order: -1; } /* Imagem vai pra cima no mobile */
-    .pane-content h3 { font-size: 1.8rem; }
 }
