@@ -166,6 +166,7 @@
     align-items: center;
     gap: 8px;
     z-index: 10;
+    justify-content: center;
 }
 
 .swiper-pagination-bullet {
@@ -178,7 +179,7 @@
 }
 
 .swiper-pagination-bullet-active {
-    width: 24px; /* Mais largo */
+    width: 36px; /* Mais largo */
     background: var(--color-solar-orange);
     opacity: 1;
 }

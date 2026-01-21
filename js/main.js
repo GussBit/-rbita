@@ -4,6 +4,7 @@ import { initAudio } from './modules/audio.js';
 import { initLoader } from './modules/loader.js';
 import { initLegacyAnimation } from './modules/legacy.js';
 import { initCasesSwiper } from './modules/cases.js';
+import { initServices } from './modules/services.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Inicializa Scroll (Lenis)
@@ -19,4 +20,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Animações de Seção
     initLegacyAnimation();
     initCasesSwiper();
+    initServices();
 });

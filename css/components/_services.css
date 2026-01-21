@@ -1,0 +1,201 @@
+/* css/components/_services.css */
+
+.services-section {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #F4F5F7; /* Branco levemente acinzentado (off-white) */
+    color: var(--color-cosmos-deep); /* Texto escuro */
+    position: relative;
+    padding: 100px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* BACKGROUND EFFECT (MOUSE) */
+.services-bg-fx {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* Gradiente radial que segue o mouse (via JS) */
+    background: radial-gradient(
+        800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+        rgba(225, 227, 235, 1), 
+        transparent 40%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+.services-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+}
+
+/* HEADER */
+.services-header { text-align: center; margin-bottom: 60px; }
+.service-eyebrow { 
+    color: var(--color-gray-soft); /* Cinza médio no tema claro */
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem;
+    display: block; margin-bottom: 12px;
+}
+.service-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--color-cosmos-deep);
+    line-height: 1.1;
+}
+.highlight-orange { color: var(--color-solar-orange); font-style: italic; }
+
+/* LAYOUT GRID (Tabs Esquerda | Conteúdo Direita) */
+.services-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 60px;
+    min-height: 500px;
+}
+
+/* NAVEGAÇÃO (BOTÕES) */
+.services-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-left: 2px solid rgba(0,0,0,0.05);
+}
+
+.tab-btn {
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 20px 24px;
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: #888;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    font-weight: 500;
+}
+
+.tab-btn:hover { color: var(--color-solar-orange); background: rgba(0,0,0,0.02); }
+
+/* Indicador Ativo (Borda lateral) */
+.tab-btn::before {
+    content: '';
+    position: absolute; left: -2px; top: 0;
+    width: 2px; height: 100%;
+    background: var(--color-solar-orange);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.tab-btn.active {
+    color: var(--color-cosmos-deep);
+    font-weight: 700;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.tab-btn.active::before { transform: scaleY(1); }
+
+/* ÁREA DE CONTEÚDO */
+.services-display {
+    position: relative;
+}
+
+.service-pane {
+    display: none; /* Escondido por padrão */
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    animation: fadeIn 0.6s ease;
+}
+
+.service-pane.active { display: grid; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Conteúdo de Texto */
+.pane-content {
+    display: flex; flex-direction: column; justify-content: center;
+}
+
+.pane-content h3 {
+    font-family: var(--font-serif); font-size: 2.2rem;
+    color: var(--color-cosmos-deep); margin-bottom: 20px;
+}
+
+.pane-content p {
+    font-size: 1rem; color: #555; line-height: 1.6; margin-bottom: 30px;
+}
+
+.service-list { margin-bottom: 40px; }
+.service-list li {
+    position: relative; padding-left: 20px; margin-bottom: 12px;
+    color: #444; font-weight: 500;
+}
+.service-list li::before {
+    content: '•'; color: var(--color-solar-orange);
+    position: absolute; left: 0; font-weight: bold;
+}
+
+.btn-service {
+    display: inline-block;
+    padding: 16px 40px;
+    background: var(--color-cosmos-deep);
+    color: white;
+    font-weight: 600;
+    border-radius: 50px;
+    align-self: flex-start;
+    transition: all 0.3s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.btn-service:hover {
+    background: var(--color-solar-orange);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 100, 59, 0.3);
+}
+
+/* Conteúdo Visual (Vídeo/Img) */
+.pane-visual {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    height: 100%; min-height: 400px;
+    background: #000;
+}
+
+.service-video, .service-img {
+    width: 100%; height: 100%; object-fit: cover;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 900px) {
+    .services-layout { grid-template-columns: 1fr; gap: 30px; }
+    
+    .services-nav {
+        flex-direction: row; overflow-x: auto;
+        border-left: none; border-bottom: 2px solid rgba(0,0,0,0.05);
+        padding-bottom: 0;
+    }
+    
+    .tab-btn { white-space: nowrap; padding: 15px 20px; font-size: 0.9rem; }
+    
+    .tab-btn::before {
+        left: 0; top: auto; bottom: -2px;
+        width: 100%; height: 2px;
+        transform: scaleX(0); transform-origin: left;
+    }
+    .tab-btn.active::before { transform: scaleX(1); }
+
+    .service-pane { grid-template-columns: 1fr; }
+    .pane-visual { height: 300px; order: -1; } /* Imagem vai pra cima no mobile */
+    .pane-content h3 { font-size: 1.8rem; }
+}
