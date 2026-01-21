@@ -218,7 +218,7 @@
         width: 100%;
         height: 100%;
         opacity: 0.8;
-        border-width: 20px;
+        border-width: 10px;
     }
     100% {
         width: 1950%; /* Expande bastante */
@@ -240,4 +240,20 @@
         left: 20px;
         padding: 16px;
     }
+
+    @keyframes pulse-orange {
+    0% {
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+        border-width: 10px;
+    }
+    100% {
+        width: 550%; /* Expande bastante */
+        height: 550%;
+        opacity: 0;
+        border-width: 0px;
+    }
+}
+    
 }
