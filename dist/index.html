@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Órbita | Design Médico Premium</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <script type="module" crossorigin src="/assets/index-B94cIrWc.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-iuIyYMYQ.css">
+</head>
+
+<body>
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+    <div class="mouse-light"></div>
+
+    <div id="loader" class="loader-container">
+        <div class="loader-content">
+            <div class="loader-text">
+                <span class="char">Ó</span><span class="char">R</span><span class="char">B</span><span class="char">I</span><span class="char">T</span><span class="char">A</span>
+            </div>
+            <div class="loader-line"></div>
+        </div>
+    </div>
+
+    <div class="audio-player">
+        <audio id="ambient-music" loop>
+            <source src="/assets/space-ambient-HKI_rMCQ.mp3" type="audio/mpeg">
+        </audio>
+        <button id="audio-btn" class="audio-btn">
+            <span class="audio-label">SOUND</span>
+            <div class="equalizer">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </div>
+        </button>
+    </div>
+
+    <nav class="orbit-nav">
+        <div class="nav-container">
+            <a href="#" class="logo">ÓRBITA<span class="dot">.</span></a>
+            <ul class="nav-links">
+                <li><a href="#portfolio">Cases</a></li>
+                <li><a href="#metodo">O Método</a></li>
+                <li><a href="#contato" class="btn-pill-small">Agendar Consultoria</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="hero" class="hero-section">
+        <div class="video-wrapper">
+            <div class="video-overlay"></div>
+            <video autoplay muted loop playsinline poster="assets/images/hero-poster.jpg" id="bg-video">
+                <source src="assets/videos/hero-desktop.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="hero-content-center">
+            <span class="eyebrow-text">Design Exclusivo para Saúde</span>
+            <h1 class="hero-title">
+                Eleve sua clínica <br>
+                à outra <span class="highlight-serif">dimensão.</span>
+            </h1>
+            <p class="hero-description">
+                Transformamos autoridade médica em legado digital.<br>
+                Branding, web design e posicionamento para o mercado high-ticket.
+            </p>
+            <div class="cta-wrapper">
+                <a href="#projeto" class="btn-pill-glow">Iniciar Projeto</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"><div class="wheel"></div></div>
+        </div>
+    </header>
+
+    <section id="legacy" class="legacy-section">
+        <div class="legacy-container">
+            <div class="legacy-text-intro">
+                <h2 class="legacy-title">
+                    Não basta ser especialista.<br>
+                    É preciso ser <span class="highlight-orange">Memorável.</span>
+                </h2>
+            </div>
+            <div class="stack-wrapper">
+                <h2 class="stack-label">Os maiores médicos do país optaram por serem memoráveis</h2>
+                <div class="cards-deck">
+                    <div class="glow-layer"></div>
+                    <div class="insta-card card-1"><div class="insta-avatar"></div><div class="insta-info"><div class="insta-name">Dr. Roberto M.</div><div class="insta-stats"><span>1.2M</span> Seguidores</div></div></div>
+                    <div class="insta-card card-2"><div class="insta-avatar"></div><div class="insta-info"><div class="insta-name">Dra. Juliana S.</div><div class="insta-stats"><span>890K</span> Seguidores</div></div></div>
+                    <div class="insta-card card-3"><div class="insta-avatar"></div><div class="insta-info"><div class="insta-name">Instituto Vision</div><div class="insta-stats"><span>2.5M</span> Seguidores</div></div></div>
+                    <div class="insta-card card-4"><div class="insta-avatar special-avatar"></div><div class="insta-info"><div class="insta-name">Dr. André F.</div><div class="insta-stats"><span>5.1M</span> Seguidores</div></div></div>
+                </div>
+            </div>
+            <div class="legacy-outro">
+                <h2 class="outro-title">Você vai ser o próximo.</h2>
+                <a href="#cases" class="btn-pill-glow">Avançar</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="cases" class="cases-section">
+        <div class="cases-container">
+            <div class="cases-header-simple">
+                <span class="cases-eyebrow">Nosso Portfólio</span>
+                <h2 class="cases-title">Transformações <span class="highlight-orange">Reais</span></h2>
+            </div>
+            <div class="swiper casesSwiper">
+                <div class="swiper-wrapper"></div> <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services-section">
+        <div class="services-sidebar">
+            <div class="services-header">
+                <span class="service-eyebrow">Expertise</span>
+                <h2 class="service-title">Como posso <br><span class="highlight-orange">te ajudar?</span></h2>
+            </div>
+
+            <div class="services-tabs">
+                <button class="tab-item active" data-target="sites">
+                    <div class="tab-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+                    <span>Websites & Landing Pages</span>
+                </button>
+                <button class="tab-item" data-target="social">
+                    <div class="tab-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+                    <span>Design Social Media</span>
+                </button>
+                <button class="tab-item" data-target="curadoria">
+                    <div class="tab-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+                    <span>Curadoria & Copy</span>
+                </button>
+                <button class="tab-item" data-target="branding">
+                    <div class="tab-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                    <span>Branding</span>
+                </button>
+                <button class="tab-item" data-target="video">
+                    <div class="tab-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
+                    <span>Edição de Vídeo</span>
+                </button>
+            </div>
+
+            <div class="service-details-container">
+                <div class="service-detail active" id="detail-sites">
+                    <p>Desenvolvimento focado em conversão. Sites que não apenas existem, mas vendem sua autoridade.</p>
+                    <a href="#orcamento" class="btn-service-cta">Solicitar Orçamento <span>→</span></a>
+                </div>
+                <div class="service-detail" id="detail-social">
+                    <p>Posts que param o scroll. Transforme seguidores em fãs com design estratégico de alto padrão.</p>
+                    <a href="#orcamento" class="btn-service-cta">Solicitar Orçamento <span>→</span></a>
+                </div>
+                <div class="service-detail" id="detail-curadoria">
+                    <p>Transformamos seu conhecimento técnico em conteúdo desejável e fácil de consumir.</p>
+                    <a href="#orcamento" class="btn-service-cta">Solicitar Orçamento <span>→</span></a>
+                </div>
+                <div class="service-detail" id="detail-branding">
+                    <p>Construção de marcas memoráveis. Do logotipo ao universo visual completo.</p>
+                    <a href="#orcamento" class="btn-service-cta">Solicitar Orçamento <span>→</span></a>
+                </div>
+                <div class="service-detail" id="detail-video">
+                    <p>Edição dinâmica para Reels e YouTube. Retenção máxima para o seu conteúdo.</p>
+                    <a href="#orcamento" class="btn-service-cta">Solicitar Orçamento <span>→</span></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="services-visual-stage">
+            <div class="visual-item active" id="visual-sites">
+                <div class="visual-overlay-grad"></div>
+                <video autoplay muted loop playsinline poster="assets/images/site-poster.jpg">
+                    <source src="assets/videos/site-demo.mp4" type="video/mp4">
+                </video>
+            </div>
+            
+            <div class="visual-item" id="visual-social">
+                <div class="visual-overlay-grad"></div>
+                <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974" alt="Social Media">
+            </div>
+
+            <div class="visual-item" id="visual-curadoria">
+                <div class="visual-overlay-grad"></div>
+                <img src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?q=80&w=2080" alt="Curadoria">
+            </div>
+
+            <div class="visual-item" id="visual-branding">
+                <div class="visual-overlay-grad"></div>
+                <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?q=80&w=2070" alt="Branding">
+            </div>
+
+            <div class="visual-item" id="visual-video">
+                <div class="visual-overlay-grad"></div>
+                <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44c?q=80&w=2070" alt="Video">
+            </div>
+        </div>
+    </section>
+
+    </body>
+</html>
