@@ -1,52 +1,192 @@
 .legacy-section {
-    width: 100%; height: 100vh; background-color: var(--color-cosmos-deep);
-    display: flex; justify-content: center; align-items: center;
-    position: relative; overflow: hidden; z-index: 2;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-cosmos-deep);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
 }
+
 .legacy-container {
-    width: 100%; max-width: 800px; height: 100%; display: flex;
-    flex-direction: column; justify-content: center; align-items: center; position: relative;
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
-.legacy-text-intro, .legacy-outro {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    text-align: center; width: 100%; z-index: 10; opacity: 0;
+
+.legacy-text-intro,
+.legacy-outro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    z-index: 10;
+    opacity: 0;
 }
-.legacy-title, .outro-title {
-    font-family: var(--font-serif); font-size: clamp(2rem, 5vw, 4rem);
-    line-height: 1.1; color: var(--color-white);
+
+.legacy-title,
+.outro-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1.1;
+    color: var(--color-white);
 }
+
 .stack-wrapper {
-    position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);
-    z-index: 5; opacity: 0; display: flex; flex-direction: column; align-items: center; max-width: 800px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
 }
+
 .stack-label {
-    font-size: 1rem; color: var(--color-gray-soft); margin-bottom: 4rem;
-    text-transform: uppercase; letter-spacing: 0.1em; text-align: center;
+    font-size: 1rem;
+    color: var(--color-gray-soft);
+    margin-bottom: 4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
 }
-.cards-deck { position: relative; width: 550px; height: 100px; }
+
+.cards-deck {
+    position: relative;
+    width: 550px;
+    height: 100px;
+}
+
 .glow-layer {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 100%; height: 100%; border-radius: 50%; background: var(--color-solar-orange);
-    filter: blur(80px); opacity: 0; transition: opacity 0.1s; z-index: -1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--color-solar-orange);
+    filter: blur(80px);
+    opacity: 0;
+    transition: opacity 0.1s;
+    z-index: -1;
 }
+
 .insta-card {
-    position: absolute; top: 0; left: 0; width: 100%; padding: 64px 32px;
-    background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 32px;
-    display: inline-block; align-items: center; gap: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    opacity: 0; transform: translateY(100px) scale(0.9);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 64px 32px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 32px;
+    display: inline-block;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transform: translateY(100px) scale(0.9);
 }
+
 .insta-avatar {
-    width: 124px; height: 124px; border-radius: 50%;
-    background: linear-gradient(45deg, #333, #555); border: 2px solid rgba(255, 255, 255, 0.1);
+    width: 124px;
+    height: 124px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #333, #555);
+    border: 2px solid rgba(255, 255, 255, 0.1);
     margin: 0 auto 15px auto;
 }
+
 .insta-avatar.special-avatar {
     background: linear-gradient(45deg, var(--color-solar-orange), #ff9e7d);
     border-color: var(--color-solar-orange);
 }
-.insta-name { font-weight: 700; font-size: clamp(1rem, 10vw, 3.5rem); color: var(--color-white); text-align: center; }
-.insta-stats { font-size: clamp(1rem, 10vw, 1.5rem); color: var(--color-gray-soft); text-align: center; }
-.insta-stats span { color: var(--color-white); font-weight: 600; }
 
-@media (max-width: 768px) { .cards-deck { width: 85%; } }
+.insta-name {
+    font-weight: 700;
+    font-size: clamp(1rem, 10vw, 3.5rem);
+    color: var(--color-white);
+    text-align: center;
+}
+
+.insta-stats {
+    font-size: clamp(1rem, 10vw, 1.5rem);
+    color: var(--color-gray-soft);
+    text-align: center;
+}
+
+.insta-stats span {
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .legacy-section {
+        height: 100svh; /* melhor no mobile que 100vh */
+        padding: 24px 16px;
+    }
+
+    .legacy-container {
+        max-width: 100%;
+    }
+
+    .legacy-text-intro,
+    .legacy-outro {
+        width: min(100%, 520px);
+        padding: 0 12px;
+    }
+
+    .stack-wrapper {
+        top: 48%;
+        width: 100%;
+        max-width: 520px;
+        padding: 0 12px;
+    }
+
+    .stack-label {
+        margin-bottom: 1.75rem;
+        font-size: 0.9rem;
+    }
+
+    .cards-deck {
+        width: min(92vw, 520px);
+        height: auto;
+        min-height: 240px; /* espaço real pro card */
+    }
+
+    .insta-card {
+        padding: 28px 18px;
+        border-radius: 22px;
+        transform: translateY(60px) scale(0.96);
+    }
+
+    .insta-avatar {
+        width: 88px;
+        height: 88px;
+        margin: 0 auto 12px auto;
+    }
+
+    .insta-name {
+        font-size: clamp(1.2rem, 6.5vw, 2.2rem);
+        line-height: 1.1;
+    }
+
+    .insta-stats {
+        font-size: clamp(0.95rem, 4.5vw, 1.2rem);
+        line-height: 1.3;
+    }
+}
