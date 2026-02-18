@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Órbita | Gerador de Pesquisa</title>
+    <title>Órbita | Gerador de Briefing</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
-    <!-- Importando o CSS Global para garantir fontes e resets -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/main.css">
     
     <script type="module" src="/js/pesquisa.js"></script>
 </head>
@@ -32,41 +31,291 @@
         <div class="form-container">
             <div class="form-header">
                 <span class="eyebrow-text">Ferramenta Interna</span>
-                <h1 class="form-title">Nova <span class="highlight-serif">Pesquisa</span></h1>
+                <h1 class="form-title">Briefing de <span class="highlight-serif">Projeto</span></h1>
+                <p style="color: var(--color-gray-soft); margin-top: 10px;">Preencha os blocos abaixo para gerar o documento base do projeto.</p>
             </div>
             
+            <div class="steps-indicator">
+                <div class="step-item">
+                    <div class="step-dot active" data-step="1">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </div>
+                    <span class="step-label">Início</span>
+                </div>
+                <span class="step-line"></span>
+                <div class="step-item">
+                    <div class="step-dot" data-step="2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
+                    <span class="step-label">Estratégia</span>
+                </div>
+                <span class="step-line"></span>
+                <div class="step-item">
+                    <div class="step-dot" data-step="3"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></div>
+                    <span class="step-label">Visual</span>
+                </div>
+                <span class="step-line"></span>
+                <div class="step-item">
+                    <div class="step-dot" data-step="4"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
+                    <span class="step-label">Entrega</span>
+                </div>
+            </div>
+
             <form id="researchForm" class="orbit-form">
-                <div class="form-group">
-                    <label for="title">Título da Pesquisa</label>
-                    <input type="text" id="title" name="title" required placeholder="Ex: Tendências de UX para Saúde 2026">
-                </div>
                 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="category">Categoria</label>
-                        <select id="category" name="category">
-                            <option value="market">Mercado & Tendências</option>
-                            <option value="ux-ui">UX / UI Design</option>
-                            <option value="branding">Branding Médico</option>
-                            <option value="tech">Tecnologia</option>
-                        </select>
+                <div class="form-step active" data-step="1">
+                    <h3 class="form-block-title">Bloco 1: Informações do Solicitante</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="solicitante_nome">Nome e Cargo</label>
+                            <input type="text" id="solicitante_nome" name="solicitante_nome" placeholder="Nome completo e cargo na empresa">
+                        </div>
+                        <div class="form-group">
+                            <label for="solicitante_funcao">Função no Projeto</label>
+                            <input type="text" id="solicitante_funcao" name="solicitante_funcao" placeholder="Nível de decisão">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="tags">Tags (separadas por vírgula)</label>
-                        <input type="text" id="tags" name="tags" placeholder="Ex: design, mobile, conversão">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="solicitante_contato">Contato</label>
+                            <input type="text" id="solicitante_contato" name="solicitante_contato" placeholder="E-mail e telefone">
+                        </div>
+                        <div class="form-group">
+                            <label for="solicitante_relacao">Relação com a Marca</label>
+                            <input type="text" id="solicitante_relacao" name="solicitante_relacao" placeholder="Ex: Fundador, Sócio, Gerente...">
+                        </div>
+                    </div>
+
+                    <div class="form-group-wrapper">
+                        <h4 class="sub-title">Sobre a Empresa</h4>
+                        <div class="form-group">
+                            <label for="empresa_nome">Nome da Empresa (Origem/Significado)</label>
+                            <input type="text" id="empresa_nome" name="empresa_nome" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="empresa_segmento">Segmento de Atuação</label>
+                                <input type="text" id="empresa_segmento" name="empresa_segmento">
+                            </div>
+                            <div class="form-group">
+                                <label for="empresa_abrangencia">Abrangência Geográfica</label>
+                                <select id="empresa_abrangencia" name="empresa_abrangencia">
+                                    <option value="Local">Local</option>
+                                    <option value="Regional">Regional</option>
+                                    <option value="Nacional">Nacional</option>
+                                    <option value="Internacional">Internacional</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <label>Metas de Negócio (Selecione as principais)</label>
+                                <div class="checkbox-grid">
+                                    <label class="checkbox-item"><input type="checkbox" name="empresa_metas" value="Aumentar Faturamento"> Aumentar Faturamento</label>
+                                    <label class="checkbox-item"><input type="checkbox" name="empresa_metas" value="Posicionamento Premium"> Posicionamento Premium</label>
+                                    <label class="checkbox-item"><input type="checkbox" name="empresa_metas" value="Atrair Investidores"> Atrair Investidores</label>
+                                    <label class="checkbox-item"><input type="checkbox" name="empresa_metas" value="Expandir Franquias"> Expandir Franquias</label>
+                                    <label class="checkbox-item"><input type="checkbox" name="empresa_metas" value="Lançamento de Produto"> Lançamento de Produto</label>
+                                    <label class="checkbox-item"><input type="checkbox" name="empresa_metas" value="Rejuvenescimento da Marca"> Rejuvenescimento da Marca</label>
+                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="empresa_mvv">Missão, Visão e Valores</label>
+                            <textarea id="empresa_mvv" name="empresa_mvv" rows="3"></textarea>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="content">Conteúdo / Insights</label>
-                    <textarea id="content" name="content" rows="8" placeholder="Escreva os principais pontos da pesquisa aqui..."></textarea>
+                <div class="form-step" data-step="2">
+                    <h3 class="form-block-title">2. Estratégia & Mercado</h3>
+                    
+                    <div class="form-group-wrapper">
+                        <h4 class="sub-title">Público-Alvo</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="publico_tipo">Tipo de Cliente</label>
+                                <select id="publico_tipo" name="publico_tipo">
+                                    <option value="B2C">B2C (Consumidor Final)</option>
+                                    <option value="B2B">B2B (Empresas)</option>
+                                    <option value="Ambos">Ambos</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="publico_faixa_etaria">Faixa Etária Predominante</label>
+                                <select id="publico_faixa_etaria" name="publico_faixa_etaria">
+                                    <option value="Jovens (18-24)">Jovens (18-24)</option>
+                                    <option value="Adultos Jovens (25-34)">Adultos Jovens (25-34)</option>
+                                    <option value="Adultos (35-50)">Adultos (35-50)</option>
+                                    <option value="Seniors (50+)">Seniors (50+)</option>
+                                    <option value="Todas as idades">Todas as idades</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="publico_classe">Classe Social</label>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-item"><input type="checkbox" name="publico_classe" value="A (Alta)"> A (Alta)</label>
+                                <label class="checkbox-item"><input type="checkbox" name="publico_classe" value="B (Média-Alta)"> B (Média-Alta)</label>
+                                <label class="checkbox-item"><input type="checkbox" name="publico_classe" value="C (Média)"> C (Média)</label>
+                                <label class="checkbox-item"><input type="checkbox" name="publico_classe" value="D/E (Popular)"> D/E (Popular)</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="publico_dores">Dores e Necessidades</label>
+                            <textarea id="publico_dores" name="publico_dores" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group-wrapper">
+                        <h4 class="sub-title">Personalidade da Marca</h4>
+                        <div class="form-group">
+                            <label>Arquétipos / Adjetivos (Selecione até 5)</label>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Sofisticada"> Sofisticada</label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Acessível"> Acessível</label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Tecnológica"> Tecnológica</label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Tradicional"> Tradicional</label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Rebelde/Ousada"> Rebelde/Ousada</label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Cuidadosa/Humana"> Cuidadosa/Humana</label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Minimalista"> Minimalista</label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Exclusiva"> Exclusiva</label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Divertida"> Divertida</label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Séria/Corporativa"> Séria/Corporativa</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="marca_tom">Tom de Voz</label>
+                            <select id="marca_tom" name="marca_tom">
+                                <option value="Formal e Técnico">Formal e Técnico</option>
+                                <option value="Informal e Próximo">Informal e Próximo</option>
+                                <option value="Inspirador e Emocional">Inspirador e Emocional</option>
+                                <option value="Direto e Objetivo">Direto e Objetivo</option>
+                                <option value="Educativo e Consultivo">Educativo e Consultivo</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group-wrapper">
+                        <h4 class="sub-title">Concorrência</h4>
+                        <div class="form-group">
+                            <label for="concorrentes_lista">Principais Concorrentes (Nomes/Links)</label>
+                            <textarea id="concorrentes_lista" name="concorrentes_lista" rows="2"></textarea>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-actions">
-                    <button type="submit" class="btn-submit">
-                        Gerar Arquivo MD
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                    </button>
+                <div class="form-step" data-step="3">
+                    <h3 class="form-block-title">3. Escopo & Visual</h3>
+                    
+                    <div class="form-group-wrapper">
+                        <h4 class="sub-title">Objetivos</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="projeto_tipo">Tipo de Projeto</label>
+                                <select id="projeto_tipo" name="projeto_tipo">
+                                    <option value="Nova Criação">Nova Criação</option>
+                                    <option value="Redesign">Redesign</option>
+                                    <option value="Atualização">Atualização</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="projeto_prazo">Prazo Ideal</label>
+                                <select id="projeto_prazo" name="projeto_prazo">
+                                    <option value="Urgente (< 30 dias)">Urgente (< 30 dias)</option>
+                                    <option value="Padrão (45-60 dias)">Padrão (45-60 dias)</option>
+                                    <option value="Longo Prazo (3+ meses)">Longo Prazo (3+ meses)</option>
+                                    <option value="Flexível">Flexível</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Materiais Necessários</label>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais" value="Logo/Identidade Visual"> Logo/Identidade Visual</label>
+                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais" value="Papelaria (Cartão, Pasta)"> Papelaria</label>
+                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais" value="Social Media Kit"> Social Media Kit</label>
+                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais" value="Website Institucional"> Website Institucional</label>
+                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais" value="Landing Page"> Landing Page</label>
+                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais" value="Apresentação PPT"> Apresentação PPT</label>
+                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais" value="Embalagem"> Embalagem</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group-wrapper">
+                        <h4 class="sub-title">Direção Visual</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="visual_logo">Tipo de Logo Preferido</label>
+                                <select id="visual_logo" name="visual_logo">
+                                    <option value="Símbolo + Texto">Símbolo + Texto</option>
+                                    <option value="Logotipo (Apenas Texto)">Logotipo (Apenas Texto)</option>
+                                    <option value="Abstrato">Abstrato</option>
+                                    <option value="Mascote/Ilustrativo">Mascote/Ilustrativo</option>
+                                    <option value="Emblema/Brasão">Emblema/Brasão</option>
+                                    <option value="Não tenho certeza">Não tenho certeza</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="visual_tipografia">Tipografia</label>
+                                <select id="visual_tipografia" name="visual_tipografia">
+                                    <option value="Serifa (Clássica/Elegante)">Serifa (Clássica/Elegante)</option>
+                                    <option value="Sem Serifa (Moderna/Limpa)">Sem Serifa (Moderna/Limpa)</option>
+                                    <option value="Manuscrita (Pessoal/Artesanal)">Manuscrita (Pessoal/Artesanal)</option>
+                                    <option value="Geométrica (Tech/Futurista)">Geométrica (Tech/Futurista)</option>
+                                    <option value="Indiferente">Indiferente</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Estilo Visual (Selecione até 3)</label>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo" value="Minimalista"> Minimalista</label>
+                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo" value="Luxuoso/Premium"> Luxuoso/Premium</label>
+                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo" value="Orgânico/Natural"> Orgânico/Natural</label>
+                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo" value="Tech/Futurista"> Tech/Futurista</label>
+                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo" value="Retrô/Vintage"> Retrô/Vintage</label>
+                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo" value="Colorido/Vibrante"> Colorido/Vibrante</label>
+                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo" value="Sóbrio/Monocromático"> Sóbrio/Monocromático</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="visual_refs">Referências Visuais (Links/Imagens)</label>
+                            <textarea id="visual_refs" name="visual_refs" rows="3" placeholder="Links do que admira e porquê"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-step" data-step="4">
+                    <h3 class="form-block-title">4. Logística & Entrega</h3>
+                    
+                    <div class="form-group">
+                        <label for="existente_inventario">Bloco 8: Materiais Existentes</label>
+                        <textarea id="existente_inventario" name="existente_inventario" rows="3" placeholder="Identidade atual, manual, slogan, redes sociais existentes..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="aplicacoes_formatos">Bloco 9: Aplicações e Formatos</label>
+                        <textarea id="aplicacoes_formatos" name="aplicacoes_formatos" rows="3" placeholder="Onde será usado (Digital/Impresso) e formatos necessários (AI, PDF...)"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="processo_colab">Bloco 10: Processo e Colaboração</label>
+                        <textarea id="processo_colab" name="processo_colab" rows="3" placeholder="Revisões, forma de feedback, decisores e critérios de aprovação"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" id="prevBtn" class="btn-nav btn-prev" disabled>← Voltar</button>
+                    <button type="button" id="nextBtn" class="btn-nav btn-next">Próximo →</button>
+                    
+                    <div id="finalActions" class="final-actions" style="display: none;">
+                        <button type="button" id="copyBtn" class="btn-nav btn-copy">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            Copiar
+                        </button>
+                        <button type="submit" id="submitBtn" class="btn-submit">
+                            Baixar MD
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>

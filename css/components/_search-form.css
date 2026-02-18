@@ -19,7 +19,7 @@ body {
 
 .form-container {
     width: 100%;
-    max-width: 700px;
+    max-width: 900px;
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -47,13 +47,107 @@ body {
 .orbit-form {
     display: flex;
     flex-direction: column;
+    width: 100%;
+}
+
+/* STEPS LOGIC */
+.form-step {
+    display: none; /* Esconde todos por padrão */
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.form-step.active {
+    display: flex; /* Mostra apenas o ativo */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* INDICADOR DE PASSOS */
+.steps-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinha no topo para os labels ficarem embaixo */
+    margin-bottom: 50px;
+    gap: 10px;
+    position: relative;
+    width: 100%;
+}
+
+.step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    z-index: 2;
+}
+
+.step-dot {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--color-cosmos-deep);
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-gray-soft);
+    transition: all 0.4s ease;
+}
+
+.step-dot.active { 
+    background: var(--color-solar-orange); 
+    border-color: var(--color-solar-orange);
+    color: #fff; 
+    box-shadow: 0 0 20px rgba(255,100,59,0.3); 
+    transform: scale(1.1);
+}
+
+.step-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-gray-soft);
+    font-weight: 600;
+}
+.step-dot.active + .step-label { color: #fff; }
+
+.step-line {
+    flex: 1;
+    height: 1px; 
+    background: rgba(255,255,255,0.1);
+    margin-top: 24px; /* Alinha com o centro da bolinha (48px / 2) */
+    max-width: 100px;
+}
+
+.form-block-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--color-solar-orange);
+    margin-bottom: 10px;
+}
+
+.sub-title {
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 5px;
+}
+
+.form-group-wrapper {
+    display: flex;
+    flex-direction: column;
     gap: 24px;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
 }
 
 .form-row {
@@ -90,14 +184,102 @@ input:focus, select:focus, textarea:focus {
 
 select {
     appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
-    background-position: right 16px center;
-    background-size: 16px;
+    background-position: right 20px center;
+    background-size: 18px;
+    padding-right: 48px;
+    cursor: pointer;
+}
+
+select option {
+    background-color: #1a1f40;
+    color: #fff;
+    padding: 12px;
+}
+
+/* CHECKBOX CUSTOMIZADO */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.checkbox-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    color: var(--color-gray-soft);
+    user-select: none;
+    min-height: 60px;
+}
+
+.checkbox-item:hover { 
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Estado Selecionado */
+.checkbox-item input:checked + span, 
+.checkbox-item:has(input:checked) {
+    background: rgba(255, 100, 59, 0.15);
+    border-color: var(--color-solar-orange);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255, 100, 59, 0.15);
+    font-weight: 600;
+}
+
+.checkbox-item input {
+    /* Esconde o input nativo mas mantém acessível */
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* NAVEGAÇÃO */
+.form-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    gap: 20px;
+}
+
+.btn-nav {
+    padding: 16px 32px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+.btn-nav:hover:not(:disabled) { background: rgba(255,255,255,0.1); }
+.btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.final-actions {
+    display: flex;
+    gap: 12px;
+    flex: 1;
+    justify-content: flex-end;
 }
 
 .btn-submit {
-    width: 100%;
+    flex: 1;
     padding: 18px;
     background: var(--color-solar-orange);
     color: #fff;
@@ -113,13 +295,24 @@ select {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    margin-top: 10px;
 }
 
 .btn-submit:hover {
     background: #ff7b57;
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(255, 100, 59, 0.3);
+}
+
+.btn-copy {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-copy:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 @media (max-width: 768px) {
