@@ -14,47 +14,186 @@ window.gsap = gsap;
 
 document.addEventListener('DOMContentLoaded', () => {
     initCursor(); // Inicia o cursor personalizado
+    
     const form = document.getElementById('researchForm');
     const steps = document.querySelectorAll('.form-step');
     const dots = document.querySelectorAll('.step-dot');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
+    const submitBtn = document.getElementById('submitBtn');
     const finalActions = document.getElementById('finalActions');
-    const copyBtn = document.getElementById('copyBtn');
     
+    // Elementos da tela de agradecimento
+    const searchFormSection = document.querySelector('.search-form-section');
+    const thankYouScreen = document.getElementById('thankYouScreen');
+    const downloadBriefingBtn = document.getElementById('downloadBriefingBtn');
+    const whatsappConfirmBtn = document.getElementById('whatsappConfirmBtn');
+    const newBriefingBtn = document.getElementById('newBriefingBtn');
+
+    const DRAFT_KEY = 'briefingDraft';
     let currentStep = 0;
+    const originalSubmitBtnHTML = submitBtn ? submitBtn.innerHTML : '';
     
     if (!form) return;
 
-    // --- LÓGICA DE PASSOS ---
-    function updateSteps() {
-        // Mostrar passo atual
-        steps.forEach((step, index) => {
-            if (index === currentStep) {
-                step.classList.add('active');
-                // Pequeno delay para garantir que o display:flex foi aplicado antes da opacidade (se houver transição complexa)
-            } else {
-                step.classList.remove('active');
+    // --- LÓGICA: MÁSCARA DE TELEFONE ---
+    const phoneInput = document.getElementById('solicitante_telefone');
+    if (phoneInput) {
+        phoneInput.setAttribute('maxlength', '15');
+        phoneInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value
+                .replace(/\D/g, '')
+                .replace(/(\d{2})(\d)/, '($1) $2')
+                .replace(/(\d{5})(\d)/, '$1-$2')
+                .replace(/(-\d{4})\d+?$/, '$1');
+        });
+    }
+
+    // --- LÓGICA DE LIMITE DE CHECKBOX ---
+    function initCheckboxLimiter() {
+        const limitedGrids = document.querySelectorAll('.checkbox-grid[data-limit]');
+
+        limitedGrids.forEach(grid => {
+            const limit = parseInt(grid.dataset.limit, 10);
+            const counterEl = document.getElementById(grid.dataset.counter);
+            const checkboxes = grid.querySelectorAll('input[type="checkbox"]');
+
+            const updateCount = () => {
+                const checkedCount = grid.querySelectorAll('input[type="checkbox"]:checked').length;
+                
+                if (counterEl) {
+                    counterEl.textContent = `${checkedCount} / ${limit}`;
+                }
+
+                if (checkedCount >= limit) {
+                    grid.classList.add('limit-reached');
+                } else {
+                    grid.classList.remove('limit-reached');
+                }
+            };
+
+            grid.addEventListener('click', (e) => {
+                const label = e.target.closest('.checkbox-item');
+                if (!label) return;
+
+                const checkbox = label.querySelector('input[type="checkbox"]');
+                const checkedCount = grid.querySelectorAll('input[type="checkbox"]:checked').length;
+
+                if (checkedCount >= limit && !checkbox.checked) {
+                    e.preventDefault();
+                    label.classList.remove('shake');
+                    void label.offsetWidth;
+                    label.classList.add('shake');
+                    setTimeout(() => label.classList.remove('shake'), 500);
+                }
+            }, true);
+            
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateCount);
+            });
+
+            updateCount();
+        });
+    }
+
+    // --- LÓGICA DE AUTO-SAVE (LOCALSTORAGE) ---
+    function saveDraft() {
+        const payload = getFormDataPayload();
+        const draft = {
+            data: payload,
+            step: currentStep
+        };
+        localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+    }
+
+    function loadDraft() {
+        const draftJSON = localStorage.getItem(DRAFT_KEY);
+        if (!draftJSON) return;
+
+        const draft = JSON.parse(draftJSON);
+        const data = draft.data;
+
+        Object.keys(data).forEach(key => {
+            const value = data[key];
+            const elements = form.querySelectorAll(`[name="${key}"]`);
+
+            if (elements.length > 0) {
+                const elType = elements[0].type;
+
+                if (elType === 'checkbox' || elType === 'radio') {
+                    const values = Array.isArray(value) ? value : [value];
+                    elements.forEach(el => {
+                        if (values.includes(el.value)) {
+                            el.checked = true;
+                        }
+                    });
+                } else {
+                    elements[0].value = value;
+                }
             }
         });
 
-        // Atualizar indicador
+        currentStep = draft.step || 0;
+        updateSteps();
+        initCheckboxLimiter();
+    }
+
+    function deleteDraft() {
+        localStorage.removeItem(DRAFT_KEY);
+    }
+
+    function initDraftPrompt() {
+        if (localStorage.getItem(DRAFT_KEY)) {
+            const promptHTML = `
+                <div class="draft-prompt" id="draftPrompt">
+                    <p>Encontramos um rascunho salvo. Deseja continuar?</p>
+                    <div>
+                        <button class="btn-draft btn-restore" id="restoreDraft">Sim, continuar</button>
+                        <button class="btn-draft btn-discard" id="discardDraft">Não, começar do zero</button>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', promptHTML);
+            
+            const promptEl = document.getElementById('draftPrompt');
+            setTimeout(() => promptEl.classList.add('visible'), 100);
+
+            promptEl.addEventListener('click', (e) => {
+                if (e.target.id === 'restoreDraft') { loadDraft(); }
+                if (e.target.id === 'discardDraft') { deleteDraft(); }
+                promptEl.classList.remove('visible');
+                setTimeout(() => promptEl.remove(), 500);
+            });
+        }
+    }
+
+    // --- LÓGICA DE PASSOS ---
+    function updateSteps() {
+        steps.forEach((step, index) => {
+            if (index === currentStep) {
+                step.classList.add('active');
+                step.style.display = 'block'; // Garante que a etapa apareça
+            } else {
+                step.classList.remove('active');
+                step.style.display = 'none'; // Esconde as outras etapas
+            }
+        });
+
         dots.forEach((dot, index) => {
             dot.classList.toggle('active', index <= currentStep);
         });
 
-        // Botões
         prevBtn.disabled = currentStep === 0;
         
+        // Controle de botões Next / Submit
         if (currentStep === steps.length - 1) {
             nextBtn.style.display = 'none';
-            finalActions.style.display = 'flex';
+            if (finalActions) finalActions.style.display = 'flex';
         } else {
-            nextBtn.style.display = 'block';
-            finalActions.style.display = 'none';
+            nextBtn.style.display = 'inline-block';
+            if (finalActions) finalActions.style.display = 'none';
         }
 
-        // Scroll para o topo do form
         const formContainer = document.querySelector('.form-container');
         if (formContainer) {
             formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -75,142 +214,101 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- FUNÇÃO GERADORA DE MARKDOWN ---
-    const generateMarkdown = () => {
+    // --- HELPER: PREPARAR DADOS PARA O BACKEND ---
+    const getFormDataPayload = () => {
         const formData = new FormData(form);
-        const getVal = (name) => {
-            const values = formData.getAll(name);
-            if (values.length === 0) return '';
-            if (values.length === 1) return values[0];
-            return values.map(v => `- ${v}`).join('\n');
-        };
+        const payload = {};
         
-        const now = new Date();
-        const dateStr = now.toISOString().split('T')[0];
-        
-        return `---
-title: "Briefing: ${getVal('empresa_nome') || 'Projeto Sem Nome'}"
-date: ${dateStr}
-client: "${getVal('solicitante_nome')}"
-type: "${getVal('projeto_tipo')}"
-status: briefing
----
-
-# Briefing de Projeto: ${getVal('empresa_nome')}
-
-## 1. Informações do Solicitante
-- **Nome/Cargo:** ${getVal('solicitante_nome')}
-- **Função no Projeto:** ${getVal('solicitante_funcao')}
-- **Contato:** ${getVal('solicitante_contato')}
-- **Relação com a Marca:** ${getVal('solicitante_relacao')}
-
-## 2. Informações da Empresa
-- **Nome/Origem:** ${getVal('empresa_nome')}
-- **Segmento:** ${getVal('empresa_segmento')}
-- **Abrangência:** ${getVal('empresa_abrangencia')}
-
-### Detalhes
-**Metas de Negócio:**
-${getVal('empresa_metas')}
-
-**Missão, Visão e Valores:**
-${getVal('empresa_mvv')}
-
-## 3. Público-Alvo e Mercado
-- **Tipo:** ${getVal('publico_tipo')}
-- **Faixa Etária:** ${getVal('publico_faixa_etaria')}
-
-**Classe Social:**
-${getVal('publico_classe')}
-
-**Dores e Necessidades:**
-${getVal('publico_dores')}
-
-## 4. Posicionamento e Personalidade
-- **Tom de Voz:** ${getVal('marca_tom')}
-
-**Arquétipos / Personalidade:**
-${getVal('marca_personalidade')}
-
-## 5. Análise Competitiva
-**Concorrentes:**
-${getVal('concorrentes_lista')}
-
-## 6. Objetivos do Projeto
-- **Tipo:** ${getVal('projeto_tipo')}
-- **Prazo:** ${getVal('projeto_prazo')}
-
-**Materiais Necessários:**
-${getVal('projeto_materiais')}
-
-## 7. Preferências Visuais
-- **Logo:** ${getVal('visual_logo')}
-- **Tipografia:** ${getVal('visual_tipografia')}
-
-**Estilo Visual:**
-${getVal('visual_estilo')}
-
-**Referências Visuais:**
-${getVal('visual_refs')}
-
-## 8. Materiais Existentes
-${getVal('existente_inventario')}
-
-## 9. Aplicações e Formatos
-${getVal('aplicacoes_formatos')}
-
-## 10. Processo e Colaboração
-${getVal('processo_colab')}
-`;
+        const keys = Array.from(new Set([...formData.keys()]));
+        keys.forEach(key => {
+            const values = formData.getAll(key);
+            payload[key] = values.length > 1 ? values : values[0];
+        });
+        return payload;
     };
 
-    // --- EVENTO: BAIXAR ARQUIVO ---
-    form.addEventListener('submit', (e) => {
+    // --- EVENTO: ENVIAR PARA O SERVIDOR ---
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const mdContent = generateMarkdown();
-        const formData = new FormData(form);
-        const empresaNome = formData.get('empresa_nome');
+        const btn = form.querySelector('.btn-submit') || form.querySelector('button[type="submit"]');
+        // const originalText = btn.innerHTML; // Usaremos a variável global agora
+        btn.innerHTML = 'Enviando...';
+        btn.disabled = true; // Previne múltiplos cliques
         
-        // Criar Blob e Link de Download
-        const blob = new Blob([mdContent], { type: 'text/markdown' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        
-        // Nome do arquivo sanitizado (ex: minha-pesquisa.md)
-        const safeName = (empresaNome || 'briefing').toLowerCase().replace(/[^a-z0-9]+/g, '-');
-        const filename = `briefing-${safeName}.md`;
-        
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        
-        // Limpeza
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        
-        // Feedback visual simples (opcional)
-        const btn = form.querySelector('.btn-submit');
-        const originalText = btn.innerHTML;
-        btn.innerHTML = 'MD Gerado! (Ver Downloads) ✓';
-        setTimeout(() => btn.innerHTML = originalText, 2000);
-        form.reset();
+        try {
+            const payload = getFormDataPayload();
+
+            const response = await fetch('http://localhost:3000/api/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) throw new Error('Erro na resposta do servidor');
+
+            // --- NOVA LÓGICA DE SUCESSO ---
+            const blob = await response.blob();
+            const safeName = (payload.empresa_nome || 'briefing').toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            const filename = `briefing-${safeName}.md`;
+
+            // Configurar botões da tela de agradecimento (se existirem na tela)
+            if (downloadBriefingBtn) {
+                const url = URL.createObjectURL(blob);
+                downloadBriefingBtn.href = url;
+                downloadBriefingBtn.download = filename;
+            }
+
+            if (whatsappConfirmBtn) {
+                const whatsappMessage = `Olá! O briefing do projeto "${payload.empresa_nome || 'Novo Projeto'}" foi preenchido com sucesso.`;
+                const whatsappUrl = `https://api.whatsapp.com/send?phone=5569984710757&text=${encodeURIComponent(whatsappMessage)}`;
+                whatsappConfirmBtn.href = whatsappUrl;
+            }
+
+            // Transição de telas
+            if (searchFormSection && thankYouScreen) {
+                searchFormSection.style.display = 'none';
+                thankYouScreen.style.display = 'flex';
+            }
+
+            // Limpar formulário e rascunho para a próxima vez
+            deleteDraft();
+            form.reset();
+            initCheckboxLimiter(); // Reseta os contadores
+
+        } catch (error) {
+            console.error(error);
+            alert('Erro ao conectar com o servidor. Verifique se o backend está rodando.');
+            btn.innerHTML = 'Erro';
+            setTimeout(() => {
+                btn.innerHTML = originalSubmitBtnHTML;
+                btn.disabled = false;
+            }, 2000);
+        }
     });
 
-    // --- EVENTO: COPIAR PARA CLIPBOARD ---
-    if(copyBtn) {
-        copyBtn.addEventListener('click', () => {
-            const mdContent = generateMarkdown();
-            navigator.clipboard.writeText(mdContent).then(() => {
-                const originalText = copyBtn.innerHTML;
-                copyBtn.innerHTML = 'Copiado! ✓';
-                copyBtn.style.borderColor = 'var(--color-solar-orange)';
-                setTimeout(() => {
-                    copyBtn.innerHTML = originalText;
-                    copyBtn.style.borderColor = '';
-                }, 2000);
-            });
+    // --- NOVO: LÓGICA DO BOTÃO "PREENCHER NOVO" ---
+    if (newBriefingBtn) {
+        newBriefingBtn.addEventListener('click', () => {
+            if (thankYouScreen) thankYouScreen.style.display = 'none';
+            if (searchFormSection) searchFormSection.style.display = 'block';
+            
+            // Resetar para o estado inicial
+            currentStep = 0;
+            updateSteps();
+
+            // Re-habilita o botão de submit
+            if (submitBtn) {
+                submitBtn.innerHTML = originalSubmitBtnHTML;
+                submitBtn.disabled = false;
+            }
         });
     }
+
+    // --- INICIALIZAÇÃO ---
+    updateSteps(); // Chamada inicial para configurar a UI
+    initCheckboxLimiter();
+    initDraftPrompt();
+    // Salva a cada alteração no formulário
+    form.addEventListener('input', saveDraft);
 });

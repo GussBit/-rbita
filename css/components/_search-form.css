@@ -138,6 +138,18 @@ body {
     padding-bottom: 5px;
 }
 
+/* NOVO: Microcopy (texto de ajuda) */
+.form-microcopy {
+    font-size: 0.8rem;
+    color: var(--color-gray-soft);
+    font-style: italic;
+    margin-top: -8px; /* Puxa para perto do label */
+    margin-bottom: 8px;
+}
+.checkbox-group-header + .checkbox-grid {
+    margin-top: 0;
+}
+
 .form-group-wrapper {
     display: flex;
     flex-direction: column;
@@ -162,6 +174,24 @@ label {
     letter-spacing: 0.1em;
     color: var(--color-gray-soft);
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+label svg {
+    color: var(--color-solar-orange);
+    width: 16px;
+    height: 16px;
+}
+
+/* Estrela para campos obrigatórios */
+.required-star {
+    color: var(--color-solar-orange);
+    font-size: 1.2rem;
+    font-weight: normal;
+    margin-left: -2px;
+    margin-right: 2px;
 }
 
 input, select, textarea {
@@ -198,6 +228,22 @@ select option {
     padding: 12px;
 }
 
+/* NOVO: Header para grupos de checkbox */
+.checkbox-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -4px;
+    margin-bottom: 12px;
+}
+
+.checkbox-group-header .form-microcopy { margin: 0; }
+
+.counter {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-gray-soft);
+}
 /* CHECKBOX CUSTOMIZADO */
 .checkbox-grid {
     display: grid;
@@ -213,7 +259,7 @@ select option {
     justify-content: center;
     text-align: center;
     background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);    
     padding: 16px;
     border-radius: 12px;
     cursor: pointer;
@@ -230,7 +276,6 @@ select option {
 }
 
 /* Estado Selecionado */
-.checkbox-item input:checked + span, 
 .checkbox-item:has(input:checked) {
     background: rgba(255, 100, 59, 0.15);
     border-color: var(--color-solar-orange);
@@ -239,6 +284,17 @@ select option {
     font-weight: 600;
 }
 
+/* Ícone de check */
+.check-icon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 16px; height: 16px;
+    color: var(--color-solar-orange);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.3s ease;
+}
 .checkbox-item input {
     /* Esconde o input nativo mas mantém acessível */
     position: absolute;
@@ -247,6 +303,31 @@ select option {
     height: 0;
     width: 0;
 }
+
+.checkbox-item:has(input:checked) .check-icon {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* NOVO: Estado de limite atingido */
+.limit-reached .checkbox-item:not(:has(input:checked)) {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.limit-reached .checkbox-item:not(:has(input:checked)):hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* NOVO: Animação de "shake" */
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+.shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
 
 /* NAVEGAÇÃO */
 .form-navigation {
@@ -303,18 +384,55 @@ select option {
     box-shadow: 0 10px 25px rgba(255, 100, 59, 0.3);
 }
 
-.btn-copy {
+/* NOVO: Estilos para o prompt de rascunho */
+.draft-prompt {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px 24px;
+    z-index: 1001;
     display: flex;
     align-items: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: translate(-50%, 20px);
+    transition: all 0.5s ease;
 }
 
-.btn-copy:hover {
-    background: rgba(255, 255, 255, 0.1);
+.draft-prompt.visible {
+    opacity: 1;
+    transform: translateX(-50%);
 }
 
+.draft-prompt p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--color-gray-soft);
+}
+
+.draft-prompt .btn-draft {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+#nextBtn {
+        background: #ffffff;
+        color: #ff643b;
+}
+
+.draft-prompt .btn-restore { background: var(--color-solar-orange); color: #fff; }
+.draft-prompt .btn-restore:hover { background: #ff7b57; }
+.draft-prompt .btn-discard { background: transparent; color: var(--color-gray-soft); }
+.draft-prompt .btn-discard:hover { background: rgba(255,255,255,0.1); color: #fff; }
 @media (max-width: 768px) {
     .form-row {
         grid-template-columns: 1fr;
@@ -322,4 +440,108 @@ select option {
     .form-container {
         padding: 24px;
     }
+}
+
+/* --- TELA DE AGRADECIMENTO --- */
+.thank-you-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    background: radial-gradient(circle at 50% 0%, #1a1f40 0%, var(--color-cosmos-deep) 60%);
+    animation: fadeIn 0.8s ease;
+}
+
+.thank-you-container {
+    text-align: center;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.thank-you-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255, 100, 59, 0.1);
+    border: 1px solid var(--color-solar-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-solar-orange);
+    box-shadow: var(--glow-orange);
+}
+
+.thank-you-title {
+    font-family: var(--font-serif);
+    font-size: 2.8rem;
+    color: var(--color-white);
+}
+
+.thank-you-message {
+    color: var(--color-gray-soft);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 500px;
+}
+
+.thank-you-actions {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-action {
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.btn-download {
+    background: var(--color-solar-orange);
+    color: #fff;
+    border: none;
+}
+.btn-download:hover {
+    background: #ff7b57;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 100, 59, 0.3);
+}
+
+.btn-whatsapp {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.btn-whatsapp:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: #fff;
+}
+
+.btn-new-briefing {
+    margin-top: 30px;
+    background: none;
+    border: none;
+    color: var(--color-gray-soft);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+.btn-new-briefing:hover {
+    color: #fff;
 }

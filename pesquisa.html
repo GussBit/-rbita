@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,12 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="/css/main.css">
-    
+
     <script type="module" src="/js/pesquisa.js"></script>
 </head>
 
@@ -32,71 +35,138 @@
             <div class="form-header">
                 <span class="eyebrow-text">Ferramenta Interna</span>
                 <h1 class="form-title">Briefing de <span class="highlight-serif">Projeto</span></h1>
-                <p style="color: var(--color-gray-soft); margin-top: 10px;">Preencha os blocos abaixo para gerar o documento base do projeto.</p>
+                <p style="color: var(--color-gray-soft); margin-top: 10px;">Preencha os blocos abaixo para gerar o
+                    documento base do projeto.</p>
             </div>
-            
+
             <div class="steps-indicator">
                 <div class="step-item">
                     <div class="step-dot active" data-step="1">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
                     </div>
                     <span class="step-label">Início</span>
                 </div>
                 <span class="step-line"></span>
                 <div class="step-item">
-                    <div class="step-dot" data-step="2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
+                    <div class="step-dot" data-step="2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="6"></circle>
+                            <circle cx="12" cy="12" r="2"></circle>
+                        </svg></div>
                     <span class="step-label">Estratégia</span>
                 </div>
                 <span class="step-line"></span>
                 <div class="step-item">
-                    <div class="step-dot" data-step="3"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></div>
+                    <div class="step-dot" data-step="3"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg></div>
                     <span class="step-label">Visual</span>
                 </div>
                 <span class="step-line"></span>
                 <div class="step-item">
-                    <div class="step-dot" data-step="4"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
+                    <div class="step-dot" data-step="4"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg></div>
                     <span class="step-label">Entrega</span>
                 </div>
             </div>
 
             <form id="researchForm" class="orbit-form">
-                
+
                 <div class="form-step active" data-step="1">
                     <h3 class="form-block-title">Bloco 1: Informações do Solicitante</h3>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="solicitante_nome">Nome e Cargo</label>
-                            <input type="text" id="solicitante_nome" name="solicitante_nome" placeholder="Nome completo e cargo na empresa">
+                            <label for="solicitante_nome"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>Nome e Cargo<span class="required-star">*</span></label>
+                            <input type="text" id="solicitante_nome" name="solicitante_nome"
+                                placeholder="Nome completo e cargo na empresa" required>
                         </div>
                         <div class="form-group">
-                            <label for="solicitante_funcao">Função no Projeto</label>
-                            <input type="text" id="solicitante_funcao" name="solicitante_funcao" placeholder="Nível de decisão">
+                            <label for="solicitante_funcao"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>Função no Projeto</label>
+                            <input type="text" id="solicitante_funcao" name="solicitante_funcao"
+                                placeholder="Nível de decisão">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="solicitante_contato">Contato</label>
-                            <input type="text" id="solicitante_contato" name="solicitante_contato" placeholder="E-mail e telefone">
+                            <label for="solicitante_email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>E-mail Profissional</label>
+                            <input type="email" id="solicitante_email" name="solicitante_email"
+                                placeholder="seu@email.com">
                         </div>
                         <div class="form-group">
-                            <label for="solicitante_relacao">Relação com a Marca</label>
-                            <input type="text" id="solicitante_relacao" name="solicitante_relacao" placeholder="Ex: Fundador, Sócio, Gerente...">
+                            <label for="solicitante_telefone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                    </path>
+                                </svg>WhatsApp / Telefone</label>
+                            <input type="tel" id="solicitante_telefone" name="solicitante_telefone"
+                                placeholder="(99) 99999-9999">
+                        </div>
+                        <div class="form-group">
+                            <label for="solicitante_relacao"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                                </svg>Relação com a Marca</label>
+                            <input type="text" id="solicitante_relacao" name="solicitante_relacao"
+                                placeholder="Ex: Fundador, Sócio, Gerente...">
                         </div>
                     </div>
 
                     <div class="form-group-wrapper">
                         <h4 class="sub-title">Sobre a Empresa</h4>
                         <div class="form-group">
-                            <label for="empresa_nome">Nome da Empresa (Origem/Significado)</label>
+                            <label for="empresa_nome"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 21h18M5 21V7l8-4 8 4v14M8 21v-4h8v4"></path>
+                                </svg>Nome da Empresa (Origem/Significado)<span class="required-star">*</span></label>
                             <input type="text" id="empresa_nome" name="empresa_nome" required>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="empresa_segmento">Segmento de Atuação</label>
+                                <label for="empresa_segmento"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z">
+                                        </path>
+                                        <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                                    </svg>Segmento de Atuação</label>
                                 <input type="text" id="empresa_segmento" name="empresa_segmento">
                             </div>
                             <div class="form-group">
-                                <label for="empresa_abrangencia">Abrangência Geográfica</label>
+                                <label for="empresa_abrangencia"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                        <path
+                                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                        </path>
+                                    </svg>Abrangência Geográfica</label>
                                 <select id="empresa_abrangencia" name="empresa_abrangencia">
                                     <option value="Local">Local</option>
                                     <option value="Regional">Regional</option>
@@ -106,31 +176,85 @@
                             </div>
                         </div>
                         <div class="form-group">
-                                <label>Metas de Negócio (Selecione as principais)</label>
-                                <div class="checkbox-grid">
-                                    <label class="checkbox-item"><input type="checkbox" name="empresa_metas" value="Aumentar Faturamento"> Aumentar Faturamento</label>
-                                    <label class="checkbox-item"><input type="checkbox" name="empresa_metas" value="Posicionamento Premium"> Posicionamento Premium</label>
-                                    <label class="checkbox-item"><input type="checkbox" name="empresa_metas" value="Atrair Investidores"> Atrair Investidores</label>
-                                    <label class="checkbox-item"><input type="checkbox" name="empresa_metas" value="Expandir Franquias"> Expandir Franquias</label>
-                                    <label class="checkbox-item"><input type="checkbox" name="empresa_metas" value="Lançamento de Produto"> Lançamento de Produto</label>
-                                    <label class="checkbox-item"><input type="checkbox" name="empresa_metas" value="Rejuvenescimento da Marca"> Rejuvenescimento da Marca</label>
-                                </div>
+                            <label><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <circle cx="12" cy="12" r="6"></circle>
+                                    <circle cx="12" cy="12" r="2"></circle>
+                                </svg>Metas de Negócio (Selecione as principais)</label>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-item"><input type="checkbox" name="empresa_metas"
+                                        value="Aumentar Faturamento"><span>Aumentar Faturamento</span><svg
+                                        class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="empresa_metas"
+                                        value="Posicionamento Premium"><span>Posicionamento Premium</span><svg
+                                        class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="empresa_metas"
+                                        value="Atrair Investidores"><span>Atrair Investidores</span><svg
+                                        class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="empresa_metas"
+                                        value="Expandir Franquias"><span>Expandir Franquias</span><svg
+                                        class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="empresa_metas"
+                                        value="Lançamento de Produto"><span>Lançamento de Produto</span><svg
+                                        class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="empresa_metas"
+                                        value="Rejuvenescimento da Marca"><span>Rejuvenescimento da Marca</span><svg
+                                        class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="empresa_mvv">Missão, Visão e Valores</label>
-                            <textarea id="empresa_mvv" name="empresa_mvv" rows="3"></textarea>
+                            <label for="empresa_mvv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                                </svg>Missão, Visão e Valores</label>
+                            <p class="form-microcopy">Como a empresa se enxerga no futuro? Quais princípios não abre
+                                mão?</p>
+                            <textarea id="empresa_mvv" name="empresa_mvv" rows="3"
+                                placeholder="Ex: Nossa missão é..., nossa visão é... e nossos valores são..."></textarea>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-step" data-step="2">
                     <h3 class="form-block-title">2. Estratégia & Mercado</h3>
-                    
+
                     <div class="form-group-wrapper">
                         <h4 class="sub-title">Público-Alvo</h4>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="publico_tipo">Tipo de Cliente</label>
+                                <label for="publico_tipo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>Tipo de Cliente</label>
                                 <select id="publico_tipo" name="publico_tipo">
                                     <option value="B2C">B2C (Consumidor Final)</option>
                                     <option value="B2B">B2B (Empresas)</option>
@@ -138,7 +262,12 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="publico_faixa_etaria">Faixa Etária Predominante</label>
+                                <label for="publico_faixa_etaria"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>Faixa Etária Predominante</label>
                                 <select id="publico_faixa_etaria" name="publico_faixa_etaria">
                                     <option value="Jovens (18-24)">Jovens (18-24)</option>
                                     <option value="Adultos Jovens (25-34)">Adultos Jovens (25-34)</option>
@@ -149,39 +278,134 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="publico_classe">Classe Social</label>
+                            <label for="publico_classe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>Classe Social</label>
                             <div class="checkbox-grid">
-                                <label class="checkbox-item"><input type="checkbox" name="publico_classe" value="A (Alta)"> A (Alta)</label>
-                                <label class="checkbox-item"><input type="checkbox" name="publico_classe" value="B (Média-Alta)"> B (Média-Alta)</label>
-                                <label class="checkbox-item"><input type="checkbox" name="publico_classe" value="C (Média)"> C (Média)</label>
-                                <label class="checkbox-item"><input type="checkbox" name="publico_classe" value="D/E (Popular)"> D/E (Popular)</label>
+                                <label class="checkbox-item"><input type="checkbox" name="publico_classe"
+                                        value="A (Alta)"><span>A (Alta)</span><svg class="check-icon" width="16"
+                                        height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="publico_classe"
+                                        value="B (Média-Alta)"><span>B (Média-Alta)</span><svg class="check-icon"
+                                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="publico_classe"
+                                        value="C (Média)"><span>C (Média)</span><svg class="check-icon" width="16"
+                                        height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="publico_classe"
+                                        value="D/E (Popular)"><span>D/E (Popular)</span><svg class="check-icon"
+                                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="publico_dores">Dores e Necessidades</label>
-                            <textarea id="publico_dores" name="publico_dores" rows="2"></textarea>
+                            <label for="publico_dores"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                </svg>Dores e Necessidades (Opcional)</label>
+                            <textarea id="publico_dores" name="publico_dores" rows="2"
+                                placeholder="O que seu cliente busca resolver que seu produto/serviço oferece?"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group-wrapper">
                         <h4 class="sub-title">Personalidade da Marca</h4>
                         <div class="form-group">
-                            <label>Arquétipos / Adjetivos (Selecione até 5)</label>
-                            <div class="checkbox-grid">
-                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Sofisticada"> Sofisticada</label>
-                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Acessível"> Acessível</label>
-                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Tecnológica"> Tecnológica</label>
-                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Tradicional"> Tradicional</label>
-                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Rebelde/Ousada"> Rebelde/Ousada</label>
-                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Cuidadosa/Humana"> Cuidadosa/Humana</label>
-                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Minimalista"> Minimalista</label>
-                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Exclusiva"> Exclusiva</label>
-                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Divertida"> Divertida</label>
-                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade" value="Séria/Corporativa"> Séria/Corporativa</label>
+                            <label><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                    </polygon>
+                                </svg>Arquétipos / Adjetivos</label>
+                            <div class="checkbox-group-header">
+                                <p class="form-microcopy">Selecione os que mais se conectam com a marca.</p>
+                                <span class="counter" id="arquetipos_counter">0 / 5</span>
+                            </div>
+                            <div class="checkbox-grid" data-limit="5" data-counter="arquetipos_counter">
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade"
+                                        value="Sofisticada"><span>Sofisticada</span><svg class="check-icon" width="16"
+                                        height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade"
+                                        value="Acessível"><span>Acessível</span><svg class="check-icon" width="16"
+                                        height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade"
+                                        value="Tecnológica"><span>Tecnológica</span><svg class="check-icon" width="16"
+                                        height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade"
+                                        value="Tradicional"><span>Tradicional</span><svg class="check-icon" width="16"
+                                        height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade"
+                                        value="Rebelde/Ousada"><span>Rebelde/Ousada</span><svg class="check-icon"
+                                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade"
+                                        value="Cuidadosa/Humana"><span>Cuidadosa/Humana</span><svg class="check-icon"
+                                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade"
+                                        value="Minimalista"><span>Minimalista</span><svg class="check-icon" width="16"
+                                        height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade"
+                                        value="Exclusiva"><span>Exclusiva</span><svg class="check-icon" width="16"
+                                        height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade"
+                                        value="Divertida"><span>Divertida</span><svg class="check-icon" width="16"
+                                        height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="marca_personalidade"
+                                        value="Séria/Corporativa"><span>Séria/Corporativa</span><svg class="check-icon"
+                                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="marca_tom">Tom de Voz</label>
+                            <label for="marca_tom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                                    <line x1="12" y1="19" x2="12" y2="23"></line>
+                                    <line x1="8" y1="23" x2="16" y2="23"></line>
+                                </svg>Tom de Voz</label>
                             <select id="marca_tom" name="marca_tom">
                                 <option value="Formal e Técnico">Formal e Técnico</option>
                                 <option value="Informal e Próximo">Informal e Próximo</option>
@@ -191,24 +415,37 @@
                             </select>
                         </div>
                     </div>
-                    
+
                     <div class="form-group-wrapper">
                         <h4 class="sub-title">Concorrência</h4>
                         <div class="form-group">
-                            <label for="concorrentes_lista">Principais Concorrentes (Nomes/Links)</label>
-                            <textarea id="concorrentes_lista" name="concorrentes_lista" rows="2"></textarea>
+                            <label for="concorrentes_lista"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="22" y1="12" x2="18" y2="12"></line>
+                                    <line x1="6" y1="12" x2="2" y2="12"></line>
+                                    <line x1="12" y1="6" x2="12" y2="2"></line>
+                                    <line x1="12" y1="22" x2="12" y2="18"></line>
+                                </svg>Principais Concorrentes (Opcional)</label>
+                            <textarea id="concorrentes_lista" name="concorrentes_lista" rows="2"
+                                placeholder="Insira nomes ou links (Instagram/Site) separados por vírgula."></textarea>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-step" data-step="3">
                     <h3 class="form-block-title">3. Escopo & Visual</h3>
-                    
+
                     <div class="form-group-wrapper">
                         <h4 class="sub-title">Objetivos</h4>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="projeto_tipo">Tipo de Projeto</label>
+                                <label for="projeto_tipo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                        <polyline points="2 17 12 22 22 17"></polyline>
+                                        <polyline points="2 12 12 17 22 12"></polyline>
+                                    </svg>Tipo de Projeto</label>
                                 <select id="projeto_tipo" name="projeto_tipo">
                                     <option value="Nova Criação">Nova Criação</option>
                                     <option value="Redesign">Redesign</option>
@@ -216,7 +453,13 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="projeto_prazo">Prazo Ideal</label>
+                                <label for="projeto_prazo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>Prazo Ideal</label>
                                 <select id="projeto_prazo" name="projeto_prazo">
                                     <option value="Urgente (< 30 dias)">Urgente (< 30 dias)</option>
                                     <option value="Padrão (45-60 dias)">Padrão (45-60 dias)</option>
@@ -226,15 +469,60 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Materiais Necessários</label>
+                            <label><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
+                                    <path
+                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                    </path>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                </svg>Materiais Necessários</label>
                             <div class="checkbox-grid">
-                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais" value="Logo/Identidade Visual"> Logo/Identidade Visual</label>
-                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais" value="Papelaria (Cartão, Pasta)"> Papelaria</label>
-                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais" value="Social Media Kit"> Social Media Kit</label>
-                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais" value="Website Institucional"> Website Institucional</label>
-                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais" value="Landing Page"> Landing Page</label>
-                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais" value="Apresentação PPT"> Apresentação PPT</label>
-                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais" value="Embalagem"> Embalagem</label>
+                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais"
+                                        value="Logo/Identidade Visual"><span>Logo/Identidade Visual</span><svg
+                                        class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais"
+                                        value="Papelaria (Cartão, Pasta)"><span>Papelaria</span><svg class="check-icon"
+                                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais"
+                                        value="Social Media Kit"><span>Social Media Kit</span><svg class="check-icon"
+                                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais"
+                                        value="Website Institucional"><span>Website Institucional</span><svg
+                                        class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais"
+                                        value="Landing Page"><span>Landing Page</span><svg class="check-icon" width="16"
+                                        height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais"
+                                        value="Apresentação PPT"><span>Apresentação Slides</span><svg class="check-icon"
+                                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="projeto_materiais"
+                                        value="Embalagem"><span>Embalagem</span><svg class="check-icon" width="16"
+                                        height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
                             </div>
                         </div>
                     </div>
@@ -243,7 +531,12 @@
                         <h4 class="sub-title">Direção Visual</h4>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="visual_logo">Tipo de Logo Preferido</label>
+                                <label for="visual_logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                        </path>
+                                    </svg>Tipo de Logo Preferido</label>
                                 <select id="visual_logo" name="visual_logo">
                                     <option value="Símbolo + Texto">Símbolo + Texto</option>
                                     <option value="Logotipo (Apenas Texto)">Logotipo (Apenas Texto)</option>
@@ -254,71 +547,197 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="visual_tipografia">Tipografia</label>
+                                <label for="visual_tipografia"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="4 7 4 4 20 4 20 7"></polyline>
+                                        <line x1="9" y1="20" x2="15" y2="20"></line>
+                                        <line x1="12" y1="4" x2="12" y2="20"></line>
+                                    </svg>Tipografia</label>
                                 <select id="visual_tipografia" name="visual_tipografia">
                                     <option value="Serifa (Clássica/Elegante)">Serifa (Clássica/Elegante)</option>
                                     <option value="Sem Serifa (Moderna/Limpa)">Sem Serifa (Moderna/Limpa)</option>
-                                    <option value="Manuscrita (Pessoal/Artesanal)">Manuscrita (Pessoal/Artesanal)</option>
+                                    <option value="Manuscrita (Pessoal/Artesanal)">Manuscrita (Pessoal/Artesanal)
+                                    </option>
                                     <option value="Geométrica (Tech/Futurista)">Geométrica (Tech/Futurista)</option>
                                     <option value="Indiferente">Indiferente</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Estilo Visual (Selecione até 3)</label>
-                            <div class="checkbox-grid">
-                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo" value="Minimalista"> Minimalista</label>
-                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo" value="Luxuoso/Premium"> Luxuoso/Premium</label>
-                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo" value="Orgânico/Natural"> Orgânico/Natural</label>
-                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo" value="Tech/Futurista"> Tech/Futurista</label>
-                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo" value="Retrô/Vintage"> Retrô/Vintage</label>
-                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo" value="Colorido/Vibrante"> Colorido/Vibrante</label>
-                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo" value="Sóbrio/Monocromático"> Sóbrio/Monocromático</label>
+                            <label><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>Estilo Visual</label>
+                            <div class="checkbox-group-header">
+                                <p class="form-microcopy">Selecione os principais direcionamentos.</p>
+                                <span class="counter" id="estilo_counter">0 / 3</span>
+                            </div>
+                            <div class="checkbox-grid" data-limit="3" data-counter="estilo_counter">
+                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo"
+                                        value="Minimalista"><span>Minimalista</span><svg class="check-icon" width="16"
+                                        height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo"
+                                        value="Luxuoso/Premium"><span>Luxuoso/Premium</span><svg class="check-icon"
+                                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo"
+                                        value="Orgânico/Natural"><span>Orgânico/Natural</span><svg class="check-icon"
+                                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo"
+                                        value="Tech/Futurista"><span>Tech/Futurista</span><svg class="check-icon"
+                                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo"
+                                        value="Retrô/Vintage"><span>Retrô/Vintage</span><svg class="check-icon"
+                                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo"
+                                        value="Colorido/Vibrante"><span>Colorido/Vibrante</span><svg class="check-icon"
+                                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo"
+                                        value="Monocromático"><span>Monocromático</span><svg
+                                        class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                                <label class="checkbox-item"><input type="checkbox" name="visual_estilo"
+                                        value="Sóbrio"><span>Sóbrio</span><svg
+                                        class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg></label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="visual_cores_gosto"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0L12 2.69z"></path>
+                                    </svg>Cores que eu gostaria de ver no projeto</label>
+                                <input type="text" id="visual_cores_gosto" name="visual_cores_gosto"
+                                    placeholder="Ex: Azul, Verde, #FFFFFF">
+                            </div>
+                            <div class="form-group">
+                                <label for="visual_cores_nao_gosto"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>Cores que eu não quero ver no projeto</label>
+                                <input type="text" id="visual_cores_nao_gosto" name="visual_cores_nao_gosto"
+                                    placeholder="Ex: Rosa, Amarelo, #000000">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="visual_refs">Referências Visuais (Links/Imagens)</label>
-                            <textarea id="visual_refs" name="visual_refs" rows="3" placeholder="Links do que admira e porquê"></textarea>
+                            <label for="visual_refs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                    <polyline points="21 15 16 10 5 21"></polyline>
+                                </svg>Referências Visuais (Opcional)</label>
+                            <textarea id="visual_refs" name="visual_refs" rows="3"
+                                placeholder="Links do que admira e porquê"></textarea>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-step" data-step="4">
                     <h3 class="form-block-title">4. Logística & Entrega</h3>
-                    
-                    <div class="form-group">
-                        <label for="existente_inventario">Bloco 8: Materiais Existentes</label>
-                        <textarea id="existente_inventario" name="existente_inventario" rows="3" placeholder="Identidade atual, manual, slogan, redes sociais existentes..."></textarea>
+
+                    <div class="form-group-wrapper">
+                        <label for="existente_inventario"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="21 8 21 21 3 21 3 8"></polyline>
+                                <rect x="1" y="3" width="22" height="5"></rect>
+                                <line x1="10" y1="12" x2="14" y2="12"></line>
+                            </svg>Materiais Existentes (Opcional)</label>
+                        <textarea id="existente_inventario" name="existente_inventario" rows="3"
+                            placeholder="Identidade atual, manual, slogan, redes sociais existentes..."></textarea>
                     </div>
 
-                    <div class="form-group">
-                        <label for="aplicacoes_formatos">Bloco 9: Aplicações e Formatos</label>
-                        <textarea id="aplicacoes_formatos" name="aplicacoes_formatos" rows="3" placeholder="Onde será usado (Digital/Impresso) e formatos necessários (AI, PDF...)"></textarea>
+                    <div class="form-group-wrapper">
+                        <label for="aplicacoes_formatos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>Aplicações e Formatos (Opcional)</label>
+                        <textarea id="aplicacoes_formatos" name="aplicacoes_formatos" rows="3"
+                            placeholder="Onde será usado (Digital/Impresso) e formatos necessários (AI, PDF...)"></textarea>
                     </div>
 
-                    <div class="form-group">
-                        <label for="processo_colab">Bloco 10: Processo e Colaboração</label>
-                        <textarea id="processo_colab" name="processo_colab" rows="3" placeholder="Revisões, forma de feedback, decisores e critérios de aprovação"></textarea>
+                    <div class="form-group-wrapper">
+                        <label for="processo_colab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 4 23 10 17 10"></polyline>
+                                <polyline points="1 20 1 14 7 14"></polyline>
+                                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                            </svg>Processo e Colaboração (Opcional)</label>
+                        <textarea id="processo_colab" name="processo_colab" rows="3"
+                            placeholder="Revisões, forma de feedback, decisores e critérios de aprovação"></textarea>
                     </div>
                 </div>
 
                 <div class="form-navigation">
                     <button type="button" id="prevBtn" class="btn-nav btn-prev" disabled>← Voltar</button>
                     <button type="button" id="nextBtn" class="btn-nav btn-next">Próximo →</button>
-                    
+
                     <div id="finalActions" class="final-actions" style="display: none;">
-                        <button type="button" id="copyBtn" class="btn-nav btn-copy">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                            Copiar
-                        </button>
                         <button type="submit" id="submitBtn" class="btn-submit">
-                            Baixar MD
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            Gerar Briefing
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M22 2L11 13"></path>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
                         </button>
                     </div>
                 </div>
             </form>
         </div>
     </section>
+
+    <!-- NOVA SEÇÃO DE AGRADECIMENTO -->
+    <section id="thankYouScreen" class="thank-you-section" style="display: none;">
+        <div class="thank-you-container">
+            <div class="thank-you-icon">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+            </div>
+            <h1 class="thank-you-title">Briefing Enviado!</h1>
+            <p class="thank-you-message">Obrigado! O documento foi gerado com sucesso. Agora você pode baixá-lo ou notificar a equipe.</p>
+            <div class="thank-you-actions">
+                <a href="#" id="downloadBriefingBtn" class="btn-action btn-download">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Baixar Briefing
+                </a>
+                <a href="#" id="whatsappConfirmBtn" target="_blank" class="btn-action btn-whatsapp">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8.3 8.3v.5z"></path></svg>
+                    Confirmar no WhatsApp
+                </a>
+            </div>
+            <button id="newBriefingBtn" class="btn-new-briefing">Preencher Novo Briefing</button>
+        </div>
+    </section>
 </body>
+
 </html>
