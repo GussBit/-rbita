@@ -12,6 +12,9 @@ import '../css/main.css';
 // Registrar GSAP globalmente para módulos que dependem dele (como o cursor)
 window.gsap = gsap;
 
+// --- CONFIGURAÇÃO: MODO DE ENVIO ---
+const USE_BACKEND = false; // Defina como TRUE para usar o Node.js ou FALSE para gerar no navegador (Frontend Only)
+
 document.addEventListener('DOMContentLoaded', () => {
     initCursor(); // Inicia o cursor personalizado
     
@@ -227,6 +230,101 @@ document.addEventListener('DOMContentLoaded', () => {
         return payload;
     };
 
+    // --- HELPER: GERAR MARKDOWN NO FRONTEND (QUANDO SEM BACKEND) ---
+    const generateLocalMarkdown = (data) => {
+        const getVal = (key) => {
+            const val = data[key];
+            if (!val) return '';
+            if (Array.isArray(val)) return val.map(v => `- ${v}`).join('\n');
+            return val;
+        };
+
+        const now = new Date();
+        const dateStr = now.toISOString().split('T')[0];
+
+        return `---
+title: "Briefing: ${data.empresa_nome || 'Projeto Sem Nome'}"
+date: ${dateStr}
+client: "${data.solicitante_nome || ''}"
+type: "${data.projeto_tipo || ''}"
+status: briefing
+---
+
+# Briefing de Projeto: ${data.empresa_nome || ''}
+
+## 1. Informações do Solicitante
+- **Nome/Cargo:** ${data.solicitante_nome || ''}
+- **Função no Projeto:** ${data.solicitante_funcao || ''}
+- **E-mail:** ${data.solicitante_email || ''}
+- **Telefone:** ${data.solicitante_telefone || ''}
+- **Relação com a Marca:** ${data.solicitante_relacao || ''}
+
+## 2. Informações da Empresa
+- **Nome/Origem:** ${data.empresa_nome || ''}
+- **Segmento:** ${data.empresa_segmento || ''}
+- **Abrangência:** ${data.empresa_abrangencia || ''}
+
+### Detalhes
+**Metas de Negócio:**
+${getVal('empresa_metas')}
+
+**Missão, Visão e Valores:**
+${data.empresa_mvv || ''}
+
+## 3. Público-Alvo e Mercado
+- **Tipo:** ${data.publico_tipo || ''}
+- **Faixa Etária:** ${data.publico_faixa_etaria || ''}
+
+**Classe Social:**
+${getVal('publico_classe')}
+
+**Dores e Necessidades:**
+${data.publico_dores || ''}
+
+## 4. Posicionamento e Personalidade
+- **Tom de Voz:** ${data.marca_tom || ''}
+
+**Arquétipos / Personalidade:**
+${getVal('marca_personalidade')}
+
+## 5. Análise Competitiva
+**Concorrentes:**
+${data.concorrentes_lista || ''}
+
+## 6. Objetivos do Projeto
+- **Tipo:** ${data.projeto_tipo || ''}
+- **Prazo:** ${data.projeto_prazo || ''}
+
+**Materiais Necessários:**
+${getVal('projeto_materiais')}
+
+## 7. Preferências Visuais
+- **Logo:** ${data.visual_logo || ''}
+- **Tipografia:** ${data.visual_tipografia || ''}
+
+**Cores Desejadas:**
+${data.visual_cores_gosto || ''}
+
+**Cores a Evitar:**
+${data.visual_cores_nao_gosto || ''}
+
+**Estilo Visual:**
+${getVal('visual_estilo')}
+
+**Referências Visuais:**
+${data.visual_refs || ''}
+
+## 8. Materiais Existentes
+${data.existente_inventario || ''}
+
+## 9. Aplicações e Formatos
+${data.aplicacoes_formatos || ''}
+
+## 10. Processo e Colaboração
+${data.processo_colab || ''}
+`;
+    };
+
     // --- EVENTO: ENVIAR PARA O SERVIDOR ---
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -238,19 +336,31 @@ document.addEventListener('DOMContentLoaded', () => {
         
         try {
             const payload = getFormDataPayload();
-
-            const response = await fetch('http://localhost:3000/api/generate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) throw new Error('Erro na resposta do servidor');
-
-            // --- NOVA LÓGICA DE SUCESSO ---
-            const blob = await response.blob();
+            let blob;
             const safeName = (payload.empresa_nome || 'briefing').toLowerCase().replace(/[^a-z0-9]+/g, '-');
             const filename = `briefing-${safeName}.md`;
+
+            if (USE_BACKEND) {
+                // --- MODO BACKEND (Node.js) ---
+                const response = await fetch('http://localhost:3000/api/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) throw new Error('Erro na resposta do servidor');
+                blob = await response.blob();
+
+            } else {
+                // --- MODO FRONTEND ONLY (Cliente) ---
+                // Simula um pequeno delay para UX
+                await new Promise(resolve => setTimeout(resolve, 800));
+                
+                const mdContent = generateLocalMarkdown(payload);
+                blob = new Blob([mdContent], { type: 'text/markdown; charset=utf-8' });
+            }
+
+            // --- LÓGICA DE SUCESSO (COMUM) ---
 
             // Configurar botões da tela de agradecimento (se existirem na tela)
             if (downloadBriefingBtn) {
