@@ -39,6 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (!form) return;
 
+    // --- CORREÇÃO: DESABILITAR VALIDAÇÃO HTML5 ---
+    // Se estiver no modo sem backend, desativamos a validação 'required' 
+    // para evitar que o navegador bloqueie o envio por causa de campos vazios em etapas ocultas.
+    if (!USE_BACKEND) {
+        form.noValidate = true;
+    }
+
     // --- LÓGICA: MÁSCARA DE TELEFONE ---
     const phoneInput = document.getElementById('solicitante_telefone');
     if (phoneInput) {
@@ -328,6 +335,7 @@ ${data.processo_colab || ''}
     // --- EVENTO: ENVIAR PARA O SERVIDOR ---
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        console.log('Iniciando envio... Backend:', USE_BACKEND);
         
         const btn = form.querySelector('.btn-submit') || form.querySelector('button[type="submit"]');
         // const originalText = btn.innerHTML; // Usaremos a variável global agora
@@ -379,6 +387,8 @@ ${data.processo_colab || ''}
             if (searchFormSection && thankYouScreen) {
                 searchFormSection.style.display = 'none';
                 thankYouScreen.style.display = 'flex';
+                // Rola para o topo para garantir que o usuário veja a mensagem
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
             // Limpar formulário e rascunho para a próxima vez
@@ -391,7 +401,7 @@ ${data.processo_colab || ''}
             alert('Erro ao conectar com o servidor. Verifique se o backend está rodando.');
             btn.innerHTML = 'Erro';
             setTimeout(() => {
-                btn.innerHTML = originalSubmitBtnHTML;
+                btn.innerHTML = originalSubmitBtnHTML || 'Gerar Briefing';
                 btn.disabled = false;
             }, 2000);
         }
